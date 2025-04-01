@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
+  console.log(req.cookies);
   const isAuthenticated = req.cookies.get("access-token")?.value !== undefined;
 
   if (req.nextUrl.pathname === "/dashboard" && !isAuthenticated) {

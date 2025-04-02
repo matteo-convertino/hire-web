@@ -3,6 +3,7 @@ import { AuthRoutes } from "@/utils/routes/authRoutes";
 import { SignUpRequestDTO } from "@/dto/request/SignUpRequestDTO";
 import { SignInRequestDTO } from "@/dto/request/SignInRequestDTO";
 import { UserResponseDTO } from "@/dto/response/UserResponseDTO";
+import { SignUpGuestRequestDTO } from "@/dto/request/SignUpGuestRequestDTO";
 
 export default class AuthService {
   private static instance: AuthService;
@@ -22,6 +23,13 @@ export default class AuthService {
     return hireApiClient.post<void>(
       AuthRoutes.REGISTER,
       signUpRequestDTO
+    ).then(res => res.data);
+  }
+
+  public async signUpGuest(signUpGuestRequestDTO: SignUpGuestRequestDTO): Promise<void> {
+    return hireApiClient.post<void>(
+      AuthRoutes.REGISTER_GUEST,
+      signUpGuestRequestDTO
     ).then(res => res.data);
   }
 

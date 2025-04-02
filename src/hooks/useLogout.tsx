@@ -15,7 +15,7 @@ export default function useLogout() {
       titleOnLoading: "Logout in progress",
       messageOnLoading: "Wait while we invalidate your credentials",
       messageOnGenericError: "There was an error while trying to logout",
-      onComplete: () => setUser(null)
+      onComplete: () => setUser(undefined)
     });
   };
 

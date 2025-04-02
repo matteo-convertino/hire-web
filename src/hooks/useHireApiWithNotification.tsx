@@ -1,11 +1,11 @@
 import { useAuth } from "@/hooks/useAuth";
-import { ErrorDTO, isErrorDTO } from "@/dto/ErrorDTO";
+import { ErrorDTO } from "@/dto/ErrorDTO";
 import { notifications } from "@mantine/notifications";
 import { Check, Info, X } from "@phosphor-icons/react";
-import callApi from "@/utils/callApi";
+import { callApi } from "@/utils/callApi";
 
 export default function useHireApiWithNotification() {
-  const { setIsAuthenticated } = useAuth();
+  const { setUser } = useAuth();
 
   function send<T>(
     {
@@ -68,7 +68,7 @@ export default function useHireApiWithNotification() {
               autoClose: 2000
             });
 
-            setIsAuthenticated(false);
+            setUser(null);
           } else if (typeof error.message === "string") {
             notifications.update({
               id: notificationId,

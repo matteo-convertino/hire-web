@@ -1,48 +1,27 @@
-"use client";
+"use server";
 
-import React, { useEffect } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import React from "react";
 import GuestLayout from "@/components/layouts/guest";
 import LoggedLayout from "@/components/layouts/logged";
-import { Loader } from "@mantine/core";
-import useHireApi from "@/hooks/useHireApi";
-import { UserResponseDTO } from "@/dto/response/UserResponseDTO";
-import AuthService from "@/services/AuthService";
+import { cookies } from "next/headers";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { user, setUser } = useAuth();
-  const hireApi = useHireApi();
 
-  useEffect(() => {
-    if (user !== undefined) return;
-
-    hireApi<UserResponseDTO>({
-      api: () => AuthService.getInstance().getUser(),
-      onComplete: (userResponseDTO: UserResponseDTO) => setUser(userResponseDTO),
-      onError: () => setUser(null),
-      onGenericError: () => setUser(null)
-    });
-
-  }, [user]);
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access-token");
+  const isLoggedIn = !!token;
 
   return (
     <>
       {
-        user === undefined ?
-          <>
-            <Loader />
-          </>
-          : user === null ?
-            <GuestLayout>
-              {children}
-            </GuestLayout> :
-            <LoggedLayout>
-              {children}
-            </LoggedLayout>
-
+        isLoggedIn ?
+          <LoggedLayout>
+            {children}
+          </LoggedLayout> :
+          <GuestLayout>
+            {children}
+          </GuestLayout>
       }
     </>
   );
 };
-
-export default Layout;

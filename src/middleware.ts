@@ -1,15 +1,24 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
+const protectedRoutes = [
+  "/dashboard"
+];
+
+const publicRoutes = [
+  "/sign-in",
+  "/"
+];
 
 export function middleware(req: NextRequest) {
-  console.log(req.cookies);
   const isAuthenticated = req.cookies.get("access-token")?.value !== undefined;
+  const pathname = req.nextUrl.pathname;
 
-  if (req.nextUrl.pathname === "/dashboard" && !isAuthenticated) {
+  if (protectedRoutes.includes(pathname) && !isAuthenticated) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
-  if (req.nextUrl.pathname === "/sign-in" && isAuthenticated) {
+  if (publicRoutes.includes(pathname) && isAuthenticated) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
@@ -17,5 +26,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard", "/sign-in"]
+  matcher: [...protectedRoutes, ...publicRoutes]
 };

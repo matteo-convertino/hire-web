@@ -1,55 +1,28 @@
-"use client";
+"use server";
 
-import { AppShell, Burger, Center, Group, Text, UnstyledButton } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { UserResponseDTO } from "@/dto/response/UserResponseDTO";
+import { callApiAsync } from "@/utils/callApi";
+import AuthService from "@/services/AuthService";
+import LoggedClient from "@/components/layouts/loggedClient";
 import React from "react";
-import classes from "./layouts.module.css";
-import Link from "next/link";
 
-const LoggedLayout = ({ children }: { children: React.ReactNode }) => {
-  const [opened, { toggle }] = useDisclosure();
+export async function getAuthUser(): Promise<UserResponseDTO | null> {
+  let user: UserResponseDTO | null = null;
 
-  return (
-    <AppShell
-      header={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: "sm", collapsed: { desktop: true, mobile: !opened } }}
-      padding="md"
-    >
-      <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Group justify="space-between" style={{ flex: 1 }}>
-            <Text fw="bold">First Next.js Project</Text>
-            <Group ml="xl" gap={0} visibleFrom="sm">
-              <Link href="/"><UnstyledButton className={classes.control}>
-                Home
-              </UnstyledButton></Link>
-              <Link href="/logout"><UnstyledButton className={classes.control}>
-                Logout
-              </UnstyledButton></Link>
-            </Group>
-          </Group>
-        </Group>
-      </AppShell.Header>
+  await callApiAsync<UserResponseDTO>({
+    api: () => AuthService.getInstance().getUser(),
+    onComplete: (userResponseDTO) => {
+      user = userResponseDTO;
+    }
+  });
 
-      <AppShell.Navbar py="md" px={4}>
-        <Link href="/"><UnstyledButton className={classes.control}>
-          Home
-        </UnstyledButton>
-        </Link>
-        <Link href="/logout"><UnstyledButton className={classes.control}>
-          Logout
-        </UnstyledButton>
-        </Link>
-      </AppShell.Navbar>
+  console.log(user);
 
-      <AppShell.Main style={{ height: "calc(100vh - 60px)" }}>
-        <Center h="100%">
-          {children}
-        </Center>
-      </AppShell.Main>
-    </AppShell>
-  );
-};
+  return user;
+}
 
-export default LoggedLayout;
+export default async function LoggedLayout({ children }: { children: React.ReactNode }) {
+  const user = await getAuthUser();
+
+  return <LoggedClient userResponseDTO={user}>{children}</LoggedClient>;
+}

@@ -21,20 +21,20 @@ export default class AuthService {
   public async signUp(signUpRequestDTO: SignUpRequestDTO): Promise<void> {
     return hireApiClient.post<void>(
       AuthRoutes.REGISTER,
-      signUpRequestDTO,
+      signUpRequestDTO
     ).then(res => res.data);
   }
 
   public async signIn(signInRequestDTO: SignInRequestDTO): Promise<void> {
     return hireApiClient.post<void>(
       AuthRoutes.LOGIN,
-      signInRequestDTO,
+      signInRequestDTO
     ).then(res => res.data);
   }
 
   public async logout(): Promise<void> {
     return hireApiClient.get<void>(
-      AuthRoutes.LOGOUT,
+      AuthRoutes.LOGOUT
     ).then(res => res.data);
   }
 

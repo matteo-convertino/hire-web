@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { ErrorDTO } from "@/dto/ErrorDTO";
-import callApi from "@/utils/callApi";
+import { callApi } from "@/utils/callApi";
 
 export default function useHireApi() {
   const { setUser } = useAuth();

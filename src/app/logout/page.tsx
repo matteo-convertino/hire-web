@@ -1,29 +1,24 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Box, Center, Text } from "@mantine/core";
 import { useAuth } from "@/hooks/useAuth";
 import useLogout from "@/hooks/useLogout";
 
 export default function Logout() {
-  const router = useRouter();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const { logout } = useLogout();
 
   useEffect(() => {
-    if(user !== null) logout();
+    if (user !== null) logout();
   }, []);
 
   useEffect(() => {
-    if (user === null) {
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
-    }
+    if (user === undefined) setTimeout(() => setUser(null), 2000);
   }, [user]);
 
-  return user !== null ? <Center>
+  return user !== undefined ?
+    <Center>
       <Text>Logging out...</Text>
     </Center> :
     <Box>

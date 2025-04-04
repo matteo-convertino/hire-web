@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
   reactStrictMode: false,
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

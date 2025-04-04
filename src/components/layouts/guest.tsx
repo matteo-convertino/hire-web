@@ -38,9 +38,7 @@ const GuestLayout = ({ children }: { children: React.ReactNode }) => {
       </AppShell.Navbar>
 
       <AppShell.Main style={{ height: "calc(100vh - 60px)" }}>
-        <Center h="100%">
           {children}
-        </Center>
       </AppShell.Main>
     </AppShell>
   );

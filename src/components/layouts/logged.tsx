@@ -9,14 +9,12 @@ import React from "react";
 export async function getAuthUser(): Promise<UserResponseDTO | null> {
   let user: UserResponseDTO | null = null;
 
-  await callApiAsync<UserResponseDTO>({
+  await callApiAsync({
     api: () => AuthService.getInstance().getUser(),
     onComplete: (userResponseDTO) => {
       user = userResponseDTO;
     }
   });
-
-  console.log(user);
 
   return user;
 }

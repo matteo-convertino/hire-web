@@ -3,8 +3,9 @@
 import { AppShell, Burger, Center, Group, Text, UnstyledButton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
-import classes from "./layouts.module.css";
+import classes from "../layouts.module.css";
 import Link from "next/link";
+import GuestMenu from "@/components/layouts/guest/GuestMenu";
 
 const GuestLayout = ({ children }: { children: React.ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
@@ -19,26 +20,20 @@ const GuestLayout = ({ children }: { children: React.ReactNode }) => {
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
-            <Text fw="bold">First Next.js Project</Text>
+            <Text size="lg" fw="bold">HIRE | Human Intelligence Recruitment Engine</Text>
             <Group ml="xl" gap={0} visibleFrom="sm">
-              <Link href="/"><UnstyledButton className={classes.control}>
-                Home
-              </UnstyledButton></Link>
-              <Link href="/sign-in"><UnstyledButton className={classes.control}>
-                Login
-              </UnstyledButton></Link>
+              <GuestMenu />
             </Group>
           </Group>
         </Group>
       </AppShell.Header>
 
       <AppShell.Navbar py="md" px={4}>
-        <UnstyledButton className={classes.control}>Home</UnstyledButton>
-        <UnstyledButton className={classes.control}>Login</UnstyledButton>
+        <GuestMenu />
       </AppShell.Navbar>
 
       <AppShell.Main style={{ height: "calc(100vh - 60px)" }}>
-          {children}
+        {children}
       </AppShell.Main>
     </AppShell>
   );

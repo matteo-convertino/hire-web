@@ -1,9 +1,9 @@
 "use server";
 
 import React from "react";
-import GuestLayout from "@/components/layouts/guest";
-import LoggedLayout from "@/components/layouts/logged";
 import { cookies } from "next/headers";
+import LoggedLayout from "@/components/layouts/logged/LoggedLayout";
+import GuestLayout from "@/components/layouts/guest/GuestLayout";
 
 
 export default async function Layout({ children }: { children: React.ReactNode }) {

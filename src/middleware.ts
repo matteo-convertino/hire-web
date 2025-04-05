@@ -2,7 +2,9 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const protectedRoutes = [
-  "/dashboard"
+  "/dashboard",
+  "/logout",
+  "/job-positions/add"
 ];
 
 const publicRoutes = [

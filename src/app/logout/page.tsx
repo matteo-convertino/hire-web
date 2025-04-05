@@ -5,7 +5,7 @@ import { Box, Center, Text } from "@mantine/core";
 import { useAuth } from "@/hooks/useAuth";
 import useLogout from "@/hooks/useLogout";
 
-export default function Logout() {
+export default function Page() {
   const { user, setUser } = useAuth();
   const { logout } = useLogout();
 
@@ -17,12 +17,16 @@ export default function Logout() {
     if (user === undefined) setTimeout(() => setUser(null), 2000);
   }, [user]);
 
-  return user !== undefined ?
-    <Center>
-      <Text>Logging out...</Text>
-    </Center> :
-    <Box>
-      <Text fw={600} ta="center">Logout successfully completed.</Text>
-      <Text>You will be redirected to the home page automatically in a few seconds</Text>
-    </Box>;
+  return (
+    <Center h="100%">
+      {
+        user === undefined
+          ? <Box>
+            <Text fw={600} ta="center">Logout successfully completed.</Text>
+            <Text>You will be redirected to the home page automatically in a few seconds</Text>
+          </Box>
+          : <Text>Logging out...</Text>
+      }
+    </Center>
+  );
 }

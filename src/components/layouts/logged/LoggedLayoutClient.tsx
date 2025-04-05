@@ -1,12 +1,11 @@
 "use client";
 
-import { AppShell, Burger, Center, Group, Text, UnstyledButton } from "@mantine/core";
+import { AppShell, Burger, Group, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useEffect } from "react";
-import classes from "./layouts.module.css";
-import Link from "next/link";
 import { UserResponseDTO } from "@/dto/response/UserResponseDTO";
 import { useAuth } from "@/hooks/useAuth";
+import LoggedMenu from "@/components/layouts/logged/LoggedMenu";
 
 
 const LoggedLayoutClient = ({ userResponseDTO, children }: {
@@ -30,34 +29,20 @@ const LoggedLayoutClient = ({ userResponseDTO, children }: {
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
-            <Text fw="bold">First Next.js Project</Text>
+            <Text size="lg" fw="bold">HIRE | Human Intelligence Recruitment Engine</Text>
             <Group ml="xl" gap={0} visibleFrom="sm">
-              <Link href="/"><UnstyledButton className={classes.control}>
-                Home
-              </UnstyledButton></Link>
-              <Link href="/logout"><UnstyledButton className={classes.control}>
-                Logout
-              </UnstyledButton></Link>
+              <LoggedMenu />
             </Group>
           </Group>
         </Group>
       </AppShell.Header>
 
       <AppShell.Navbar py="md" px={4}>
-        <Link href="/"><UnstyledButton className={classes.control}>
-          Home
-        </UnstyledButton>
-        </Link>
-        <Link href="/logout"><UnstyledButton className={classes.control}>
-          Logout
-        </UnstyledButton>
-        </Link>
+        <LoggedMenu />
       </AppShell.Navbar>
 
       <AppShell.Main style={{ height: "calc(100vh - 60px)" }}>
-        <Center h="100%">
-          {children}
-        </Center>
+        {children}
       </AppShell.Main>
     </AppShell>
   );

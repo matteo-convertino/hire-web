@@ -5,8 +5,11 @@ import { callApiAsync } from "@/utils/callApi";
 import JobPositionService from "@/services/JobPositionService";
 import Client from "./Client";
 
-export async function fetchJobPosition(id: number): Promise<JobPositionResponseDTO | null> {
+export async function fetchJobPosition(idString: string): Promise<JobPositionResponseDTO | null> {
   let jobPosition: JobPositionResponseDTO | null = null;
+  let id = Number(idString);
+
+  if (isNaN(id) || !Number.isInteger(id)) return jobPosition;
 
   await callApiAsync({
     api: () => JobPositionService.getInstance().getById(id),
@@ -16,7 +19,7 @@ export async function fetchJobPosition(id: number): Promise<JobPositionResponseD
   return jobPosition;
 }
 
-export default async function Page({ params }: { params: Promise<{ id: number }> }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const jobPosition = await fetchJobPosition(id);
 

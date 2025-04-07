@@ -1,4 +1,5 @@
 import { ErrorDTO, isErrorDTO } from "@/dto/ErrorDTO";
+import { notFound } from "next/navigation";
 
 export function callApi<T>(
   {
@@ -35,7 +36,13 @@ export async function callApiAsync<T>(
   await api()
     .then(res => onComplete?.(res))
     .catch(e => {
-      console.log(e);
-      isErrorDTO(e) ? onError?.(e) : onGenericError?.(e);
+      if(e.response && isErrorDTO(e.response.data)) {
+        onError?.(e);
+        if(e.status === 404) notFound();
+      } else {
+        onGenericError?.(e);
+      }
+
+      throw new Error(e.message);
     });
 }

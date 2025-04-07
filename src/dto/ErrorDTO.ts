@@ -10,7 +10,7 @@ export function isErrorDTO(obj: any): obj is ErrorDTO {
   return (
     obj !== null &&
     typeof obj === "object" &&
-    typeof obj.code === "number" &&
+    typeof obj.status === "number" &&
     typeof obj.message === "string"
   );
 }

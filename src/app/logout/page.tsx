@@ -19,14 +19,10 @@ export default function Page() {
 
   return (
     <Center h="100%">
-      {
-        user === undefined
-          ? <Box>
-            <Text fw={600} ta="center">Logout successfully completed.</Text>
-            <Text>You will be redirected to the home page automatically in a few seconds</Text>
-          </Box>
-          : <Text>Logging out...</Text>
-      }
+      <Box>
+        <Text fw={600} ta="center">Logout successfully completed.</Text>
+        <Text>You will be redirected to the home page automatically in a few seconds</Text>
+      </Box>
     </Center>
   );
 }

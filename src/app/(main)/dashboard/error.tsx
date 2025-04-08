@@ -14,6 +14,7 @@ export default function Error(
   useEffect(() => {
     // console.error(error);
   }, [error]);
+
   return (
     <Center h="100%">
       <Stack align="center">

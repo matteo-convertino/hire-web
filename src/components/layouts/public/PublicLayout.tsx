@@ -1,13 +1,11 @@
 "use client";
 
-import { AppShell, Burger, Center, Group, Text, UnstyledButton } from "@mantine/core";
+import { AppShell, Burger, Group, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
-import classes from "../layouts.module.css";
-import Link from "next/link";
-import GuestMenu from "@/components/layouts/guest/GuestMenu";
+import PublicMenu from "@/components/layouts/public/PublicMenu";
 
-const GuestLayout = ({ children }: { children: React.ReactNode }) => {
+const PublicLayout = ({ children }: { children: React.ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -22,14 +20,14 @@ const GuestLayout = ({ children }: { children: React.ReactNode }) => {
           <Group justify="space-between" style={{ flex: 1 }}>
             <Text size="lg" fw="bold">HIRE | Human Intelligence Recruitment Engine</Text>
             <Group ml="xl" gap={0} visibleFrom="sm">
-              <GuestMenu />
+              <PublicMenu />
             </Group>
           </Group>
         </Group>
       </AppShell.Header>
 
       <AppShell.Navbar py="md" px={4}>
-        <GuestMenu />
+        <PublicMenu />
       </AppShell.Navbar>
 
       <AppShell.Main style={{ height: "calc(100vh - 60px)" }}>
@@ -39,4 +37,4 @@ const GuestLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default GuestLayout;
+export default PublicLayout;

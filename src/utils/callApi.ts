@@ -1,5 +1,5 @@
 import { ErrorDTO, isErrorDTO } from "@/dto/ErrorDTO";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export function callApi<T>(
   {
@@ -43,6 +43,7 @@ export async function callApiAsync<T>(
         onGenericError?.(e);
       }
 
-      throw new Error(e.message);
+      // redirect("/error");
+      // throw new Error(e);
     });
 }

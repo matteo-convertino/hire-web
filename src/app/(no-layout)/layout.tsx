@@ -1,15 +1,14 @@
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
-import "./globals.css";
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import "../globals.css";
+import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import React from "react";
 import { AuthProvider } from "@/context/AuthContext";
 import theme from "@/app/theme";
 import { Notifications } from "@mantine/notifications";
 import { Metadata } from "next";
-import Layout from "@/components/layouts/Layout";
 import { Roboto } from "next/font/google";
-import { AddJobPosition } from "@/components/modals/AddJobPosition";
+import PublicLayout from "@/components/layouts/public/PublicLayout";
 
 export const metadata: Metadata = {
   title: "Hire",
@@ -17,14 +16,11 @@ export const metadata: Metadata = {
 };
 
 const roboto = Roboto({
-  weight: "400",
+  weight: "500",
   subsets: ["latin"]
 });
 
-export default function RootLayout({ children, modal }: {
-  children: React.ReactNode,
-  modal: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html className={roboto.className} {...mantineHtmlProps}>
@@ -36,12 +32,9 @@ export default function RootLayout({ children, modal }: {
     <MantineProvider theme={theme} defaultColorScheme="dark">
       <Notifications position="top-right" />
       <AuthProvider>
-        <Layout>
-          {modal}
+        <PublicLayout>
           {children}
-        </Layout>
-        {/*<AddJobPosition />*/}
-
+        </PublicLayout>
       </AuthProvider>
     </MantineProvider>
     </body>

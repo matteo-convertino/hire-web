@@ -1,8 +1,13 @@
 import { useAuth } from "@/hooks/useAuth";
 import { ErrorDTO } from "@/dto/ErrorDTO";
 import { notifications } from "@mantine/notifications";
-import { Check, Info, X } from "@phosphor-icons/react";
 import { callApi } from "@/utils/callApi";
+import {
+  showHireErrors,
+  showHireInfoNotification,
+  updateHireErrorNotification,
+  updateHireSuccessNotification
+} from "@/utils/hireNotifications";
 
 export default function useHireApiWithNotification() {
   const { setUser } = useAuth();
@@ -42,15 +47,10 @@ export default function useHireApiWithNotification() {
       {
         api: api,
         onComplete: (response) => {
-          notifications.update({
-            id: notificationId,
-            color: "teal",
+          updateHireSuccessNotification({
+            notificationId: notificationId,
             title: titleOnSuccess,
-            message: messageOnSuccess,
-            icon: <Check size={16} />,
-            loading: false,
-            withCloseButton: true,
-            autoClose: 2000
+            message: messageOnSuccess
           });
 
           onComplete?.(response);
@@ -58,32 +58,29 @@ export default function useHireApiWithNotification() {
         onError: (error) => {
           if (error.status === 498) { // invalid jwt
             notifications.hide(notificationId);
-            notifications.show({
-              color: "blue",
+            showHireInfoNotification({
               title: "Authentication",
-              message: "Your session has expired. Please log in again.",
-              icon: <Info size={16} />,
-              loading: false,
-              withCloseButton: true,
-              autoClose: 2000
+              message: "Your session has expired. Please log in again."
             });
 
             setUser(null);
-          } else if (typeof error.message === "string") {
-            notifications.update({
-              id: notificationId,
-              color: "red",
+          } else {
+            showHireErrors({ notificationId: notificationId, errorDTO: error });
+          }/*else if (typeof error.message === "string") {
+            updateHireErrorNotification({
+              notificationId: notificationId,
               title: error.error,
-              message: error.message,
-              icon: <X size={16} />,
-              loading: false,
-              withCloseButton: true,
-              autoClose: 2000
+              message: error.message
             });
           } else {
             notifications.hide(notificationId);
 
             for (const key of Object.keys(error.message)) {
+              showHireErrorNotification({
+                title: error.error,
+                message: error.message[key as keyof typeof error.message],
+              })
+
               notifications.show({
                 color: "red",
                 title: error.error,
@@ -94,22 +91,16 @@ export default function useHireApiWithNotification() {
                 autoClose: 2000
               });
             }
-          }
+          }*/
 
           onError?.(error);
         },
         onGenericError: (error) => {
-          notifications.update({
-            id: notificationId,
-            color: "red",
+          updateHireErrorNotification({
+            notificationId: notificationId,
             title: "Generic Error",
-            message: messageOnGenericError,
-            icon: <X size={16} />,
-            loading: false,
-            withCloseButton: true,
-            autoClose: 2000
+            message: messageOnGenericError
           });
-
           onGenericError?.(error);
         }
       }

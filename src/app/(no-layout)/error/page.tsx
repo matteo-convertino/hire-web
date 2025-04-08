@@ -3,17 +3,7 @@
 import { Center, Stack, Text } from "@mantine/core";
 import { useEffect } from "react";
 
-export default function Error(
-  {
-    error,
-    reset
-  }: {
-    error: Error & { digest?: string }
-    reset: () => void
-  }) {
-  useEffect(() => {
-    // console.error(error);
-  }, [error]);
+export default function Page() {
   return (
     <Center h="100%">
       <Stack align="center">
@@ -21,5 +11,4 @@ export default function Error(
       </Stack>
     </Center>
   );
-
 }

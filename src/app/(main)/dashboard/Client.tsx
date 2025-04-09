@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { showHireErrors } from "@/utils/hireNotifications";
 
 export default function Client({ jobPositions, error }: {
-  jobPositions: JobPositionResponseDTO[],
+  jobPositions: JobPositionResponseDTO[] | null,
   error: ErrorDTO | null | undefined
 }) {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function Client({ jobPositions, error }: {
   return (
     <SimpleGrid cols={3}>
       {
-        jobPositions.map((jobPosition) =>
+        jobPositions?.map((jobPosition) =>
           <HireInterviewCard
             key={jobPosition.id}
             jobPosition={jobPosition}

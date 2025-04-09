@@ -1,12 +1,10 @@
 "use client";
 
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
-import { SimpleGrid } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import HireInterviewCard from "@/components/hire/HireInterviewCard";
 import { ErrorDTO } from "@/dto/ErrorDTO";
-import { useEffect } from "react";
-import { showHireErrors } from "@/utils/hireNotifications";
+import { useHireClientErrorHandler } from "@/hooks/useHireClientErrorHandler";
+import { JobPositionsGrid } from "@/components/job-positions/Grid";
 
 export default function Client({ jobPositions, error }: {
   jobPositions: JobPositionResponseDTO[] | null,
@@ -14,29 +12,14 @@ export default function Client({ jobPositions, error }: {
 }) {
   const router = useRouter();
 
-  useEffect(() => {
-    if (error === null) return;
-
-    showHireErrors({
-      notificationId: null,
-      errorDTO: error
-    });
-  }, [error]);
+  useHireClientErrorHandler(error);
 
   return (
-    <SimpleGrid cols={3}>
-      {
-        jobPositions?.map((jobPosition) =>
-          <HireInterviewCard
-            key={jobPosition.id}
-            jobPosition={jobPosition}
-            onView={() => router.push(`/job-positions/${jobPosition.id}`)}
-            onEdit={() => router.push(`/job-positions/${jobPosition.id}/edit`)}
-            onDelete={() => router.push(`/job-positions/${jobPosition.id}/delete`)}
-          />
-        )
-      }
-    </SimpleGrid>
-
+    <JobPositionsGrid
+      jobPositions={jobPositions ?? []}
+      onView={(id) => router.push(`/job-positions/${id}`)}
+      onEdit={(id) => router.push(`/job-positions/${id}/edit`)}
+      onDelete={(id) => router.push(`/job-positions/${id}/delete`)}
+    />
   );
 }

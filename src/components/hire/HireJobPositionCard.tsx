@@ -3,7 +3,7 @@ import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 import { MouseEventHandler } from "react";
 import { PencilSimple, Trash } from "@phosphor-icons/react";
 
-export default function HireInterviewCard({ jobPosition, onView, onEdit, onDelete }: {
+export default function HireJobPositionCard({ jobPosition, onView, onEdit, onDelete }: {
   jobPosition: JobPositionResponseDTO,
   onView?: MouseEventHandler<HTMLButtonElement> | undefined
   onEdit?: MouseEventHandler<HTMLButtonElement> | undefined

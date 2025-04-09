@@ -1,6 +1,6 @@
 import { HireModal } from "@/components/hire/HireModal";
 
-export const Add = (
+export const JobPositionAdd = (
   {
     isFirstPage = false
   }: {
@@ -11,5 +11,4 @@ export const Add = (
       Prova
     </HireModal>
   );
-
 };

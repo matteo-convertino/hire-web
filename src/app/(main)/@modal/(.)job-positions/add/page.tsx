@@ -1,5 +1,5 @@
-import { Add } from "@/components/job-positions/Add";
+import { JobPositionAdd } from "@/components/job-positions/Add";
 
 export default function Page() {
-  return <Add />;
+  return <JobPositionAdd />;
 }

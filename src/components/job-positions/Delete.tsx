@@ -1,7 +1,7 @@
 import { HireModal } from "@/components/hire/HireModal";
 import { Button, Group, Text } from "@mantine/core";
 
-export const Delete = (
+export const JobPositionDelete = (
   {
     isFirstPage = false
   }: {

@@ -23,17 +23,17 @@ export function callApi<T>(
 
 export async function callApiAsync<T>({ api }: { api: () => Promise<T> }): Promise<{
   response: T | null;
-  error: ErrorDTO | null | undefined
+  error: ErrorDTO | null
 }> {
   try {
     const response = await api();
-    return { response: response, error: undefined };
+    return { response: response, error: null };
   } catch (e: any) {
     if (e.response && isErrorDTO(e.response.data)) {
       if (e.status === 404) notFound();
       return { response: null, error: e.response.data };
-    } else {
-      return { response: null, error: null };
     }
+
+    redirect("/error");
   }
 }

@@ -10,12 +10,12 @@ import { showHireErrors } from "@/utils/hireNotifications";
 
 export default function Client({ jobPositions, error }: {
   jobPositions: JobPositionResponseDTO[] | null,
-  error: ErrorDTO | null | undefined
+  error: ErrorDTO | null
 }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (error === undefined) return;
+    if (error === null) return;
 
     showHireErrors({
       notificationId: null,

@@ -4,7 +4,7 @@ import { callApiAsync } from "@/utils/callApi";
 import JobPositionService from "@/services/JobPositionService";
 import Client from "./Client";
 
-export function fetchJobPositionsByUser() {
+export async function fetchJobPositionsByUser() {
   return callApiAsync({
     api: () => JobPositionService.getInstance().getAllByUser()
   });

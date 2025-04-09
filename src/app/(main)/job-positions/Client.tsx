@@ -1,7 +1,7 @@
 "use client";
 
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
-import { SimpleGrid } from "@mantine/core";
+import { SimpleGrid, Text } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import HireInterviewCard from "@/components/hire/HireInterviewCard";
 import { ErrorDTO } from "@/dto/ErrorDTO";
@@ -10,12 +10,12 @@ import { showHireErrors } from "@/utils/hireNotifications";
 
 export default function Client({ jobPositions, error }: {
   jobPositions: JobPositionResponseDTO[] | null,
-  error: ErrorDTO | null | undefined
+  error: ErrorDTO | null
 }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (error === undefined) return;
+    if (error === null) return;
 
     showHireErrors({
       notificationId: null,

@@ -1,5 +1,5 @@
 import React from "react";
-import { HireMenuButton } from "@/components/hire/HireMenuButton";
+import { HireMenuButton } from "@/components/HireMenuButton";
 
 export default function PublicMenu() {
   return (

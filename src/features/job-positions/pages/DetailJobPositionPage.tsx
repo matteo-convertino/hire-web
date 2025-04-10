@@ -1,11 +1,11 @@
 "use client";
 
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
-import { Text } from "@mantine/core";
 import { ErrorDTO } from "@/dto/ErrorDTO";
 import { useHireClientErrorHandler } from "@/hooks/useHireClientErrorHandler";
+import { Text } from "@mantine/core";
 
-export default function Client({ jobPosition, error }: {
+export default function DetailJobPositionPage({ jobPosition, error }: {
   jobPosition: JobPositionResponseDTO | null,
   error: ErrorDTO | null
 }) {

@@ -70,11 +70,11 @@ export const showHireErrors = ({ notificationId, errorDTO }: {
   notificationId: string | null,
   errorDTO: ErrorDTO | null
 }) => {
-  if(errorDTO === null) {
+  if (errorDTO === null) {
     showHireErrorNotification({
       title: "Generic error",
-      message: "Internal server error",
-    })
+      message: "Internal server error"
+    });
   } else {
     const title = errorDTO.error;
     const message = errorDTO.message;

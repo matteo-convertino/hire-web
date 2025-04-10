@@ -4,8 +4,9 @@ import { AppShell, Burger, Group, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useEffect } from "react";
 import { UserResponseDTO } from "@/dto/response/UserResponseDTO";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import LoggedMenu from "@/components/layouts/logged/LoggedMenu";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 
 
 const LoggedLayoutClient = ({ userResponseDTO, children }: {
@@ -13,7 +14,8 @@ const LoggedLayoutClient = ({ userResponseDTO, children }: {
   children: React.ReactNode
 }) => {
   const [opened, { toggle }] = useDisclosure();
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const { user } = useAuthStore();
 
   useEffect(() => {
     if (user === null) window.location.replace("/");

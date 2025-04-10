@@ -10,25 +10,33 @@ export const HireModal = (
     title,
     centered = true,
     isFirstPage = false,
-    children
+    opened,
+    setOpened,
+    children,
   }: {
     title: string,
     centered?: boolean,
     isFirstPage?: boolean,
-    children: React.ReactNode
+    opened?: boolean,
+    setOpened?: React.Dispatch<React.SetStateAction<boolean>>,
+    children?: React.ReactNode,
   }) => {
   const router = useRouter();
-  const [opened, setOpened] = useState(false);
+  const [openedInternal, setOpenedInternal] = useState(false);
+
+  // Se non ci sono prop, usiamo lo stato interno
+  const openedState = opened ?? openedInternal;
+  const setOpenedState = setOpened ?? setOpenedInternal;
 
   useEffect(() => {
-    const id = requestAnimationFrame(() => setOpened(true));
+    const id = requestAnimationFrame(() => setOpenedState(true));
     return () => cancelAnimationFrame(id);
   }, []);
 
   return (
     <Modal
-      opened={opened}
-      onClose={() => setOpened(false)}
+      opened={openedState}
+      onClose={() => setOpenedState(false)}
       title={title}
       centered={centered}
       closeButtonProps={{

@@ -1,5 +1,5 @@
-import { JobPositionAdd } from "@/components/job-positions/Add";
+import AddJobPositionPage from "@/features/job-positions/pages/AddJobPositionPage";
 
 export default function Page() {
-  return <JobPositionAdd />;
+  return <AddJobPositionPage isFirstPage={false} />;
 }

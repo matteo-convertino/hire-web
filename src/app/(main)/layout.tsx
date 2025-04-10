@@ -2,7 +2,7 @@ import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "../globals.css";
 import React from "react";
-import { AuthProvider } from "@/context/AuthContext";
+import { AuthProvider } from "@/features/auth/context/AuthContext";
 import Layout from "@/components/layouts/Layout";
 
 export default function MainLayout({ children, modal }: {
@@ -11,11 +11,9 @@ export default function MainLayout({ children, modal }: {
 }) {
 
   return (
-    <AuthProvider>
-      <Layout>
-        {modal}
-        {children}
-      </Layout>
-    </AuthProvider>
+    <Layout>
+      {modal}
+      {children}
+    </Layout>
   );
 }

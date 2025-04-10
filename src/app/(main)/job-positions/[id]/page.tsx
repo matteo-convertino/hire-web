@@ -2,8 +2,8 @@
 
 import { callApiAsync } from "@/utils/callApi";
 import JobPositionService from "@/services/JobPositionService";
-import Client from "./Client";
 import { notFound } from "next/navigation";
+import DetailJobPositionPage from "@/features/job-positions/pages/DetailJobPositionPage";
 
 export async function fetchJobPosition(idString: string) {
   let id = Number(idString);
@@ -19,5 +19,5 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const { id } = await params;
   const { response, error } = await fetchJobPosition(id);
 
-  return <Client jobPosition={response} error={error} />;
+  return <DetailJobPositionPage jobPosition={response} error={error} />;
 }

@@ -1,5 +1,5 @@
-import { JobPositionDelete } from "@/components/job-positions/Delete";
+import DeleteJobPositionPage from "@/features/job-positions/pages/DeleteJobPositionPage";
 
 export default function Page() {
-  return <JobPositionDelete isFirstPage={true} />;
+  return <DeleteJobPositionPage isFirstPage={true} />;
 }

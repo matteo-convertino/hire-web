@@ -1,8 +1,8 @@
 "use server";
 
 import { callApiAsync } from "@/utils/callApi";
-import Client from "./Client";
 import JobPositionService from "@/services/JobPositionService";
+import JobPositionsPage from "@/features/job-positions/pages/JobPositionsPage";
 
 export async function fetchJobPositions() {
   return callApiAsync({
@@ -13,5 +13,5 @@ export async function fetchJobPositions() {
 export default async function Home() {
   const { response, error } = await fetchJobPositions();
 
-  return <Client jobPositions={response} error={error} />;
+  return <JobPositionsPage initialJobPositions={response} error={error} />;
 }

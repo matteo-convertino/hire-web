@@ -1,28 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { Box, Center, Text } from "@mantine/core";
-import { useAuth } from "@/hooks/useAuth";
-import useLogout from "@/hooks/useLogout";
+import LogoutPage from "@/features/auth/LogoutPage";
 
 export default function Page() {
-  const { user, setUser } = useAuth();
-  const { logout } = useLogout();
-
-  useEffect(() => {
-    if (user !== null) logout();
-  }, []);
-
-  useEffect(() => {
-    if (user === undefined) setTimeout(() => setUser(null), 2000);
-  }, [user]);
-
-  return (
-    <Center h="100%">
-      <Box>
-        <Text fw={600} ta="center">Logout successfully completed.</Text>
-        <Text>You will be redirected to the home page automatically in a few seconds</Text>
-      </Box>
-    </Center>
-  );
+  return <LogoutPage />;
 }

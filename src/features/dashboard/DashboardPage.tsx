@@ -1,18 +1,22 @@
 "use client";
 
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
-import { useRouter } from "next/navigation";
 import { ErrorDTO } from "@/dto/ErrorDTO";
+import { useRouter } from "next/navigation";
 import { useHireClientErrorHandler } from "@/hooks/useHireClientErrorHandler";
-import { JobPositionsGrid } from "@/components/job-positions/Grid";
+import { JobPositionsGrid } from "@/features/job-positions/components/JobPositionsGrid";
+import { useDashboardStore } from "@/features/dashboard/stores/useDashboardStore";
+import { useJobPositionsAutoFetch } from "@/features/dashboard/hooks/useJobPositionsAutoFetch";
 
-export default function Client({ jobPositions, error }: {
-  jobPositions: JobPositionResponseDTO[] | null,
+export default function DashboardPage({ initialJobPositions, error }: {
+  initialJobPositions: JobPositionResponseDTO[] | null,
   error: ErrorDTO | null
 }) {
   const router = useRouter();
+  const { jobPositions } = useDashboardStore();
 
   useHireClientErrorHandler(error);
+  useJobPositionsAutoFetch(initialJobPositions);
 
   return (
     <JobPositionsGrid

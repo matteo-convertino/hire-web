@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { Plus } from "@phosphor-icons/react";
-import { HireMenuButton } from "@/components/hire/HireMenuButton";
+import { HireMenuButton } from "@/components/HireMenuButton";
 
 export default function LoggedMenu() {
   return (

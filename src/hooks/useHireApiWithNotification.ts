@@ -68,32 +68,7 @@ export default function useHireApiWithNotification() {
             setUser(null);
           } else {
             showHireErrors({ notificationId: notificationId, errorDTO: error });
-          }/*else if (typeof error.message === "string") {
-            updateHireErrorNotification({
-              notificationId: notificationId,
-              title: error.error,
-              message: error.message
-            });
-          } else {
-            notifications.hide(notificationId);
-
-            for (const key of Object.keys(error.message)) {
-              showHireErrorNotification({
-                title: error.error,
-                message: error.message[key as keyof typeof error.message],
-              })
-
-              notifications.show({
-                color: "red",
-                title: error.error,
-                message: error.message[key as keyof typeof error.message],
-                icon: <X size={16} />,
-                loading: false,
-                withCloseButton: true,
-                autoClose: 2000
-              });
-            }
-          }*/
+          }
 
           onError?.(error);
         },

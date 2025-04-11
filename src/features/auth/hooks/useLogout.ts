@@ -1,10 +1,8 @@
-import { useAuth } from "@/features/auth/hooks/useAuth";
 import AuthService from "@/services/AuthService";
 import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 
 export default function useLogout() {
-  // const { setUser } = useAuth();
   const { setUser } = useAuthStore();
   const authService = AuthService.getInstance();
   const hireApiWithNotification = useHireApiWithNotification();
@@ -20,7 +18,6 @@ export default function useLogout() {
       onComplete: () => setUser(undefined)
     });
   };
-
 
   return { logout };
 }

@@ -1,4 +1,4 @@
-import { ErrorDTO, isErrorDTO } from "@/dto/ErrorDTO";
+import { ErrorDTO, ErrorDTOSchema } from "@/dto/ErrorDTO";
 import { notFound, redirect } from "next/navigation";
 
 export function callApi<T>(
@@ -16,8 +16,10 @@ export function callApi<T>(
   api()
     .then(res => onComplete?.(res))
     .catch(e => {
-      console.log(e);
-      isErrorDTO(e) ? onError?.(e) : onGenericError?.(e);
+      const rawData = e?.response?.data;
+      const parsed = ErrorDTOSchema.safeParse(rawData);
+
+      parsed.success ? onError?.(parsed.data) : onGenericError?.(e);
     });
 }
 
@@ -29,7 +31,10 @@ export async function callApiAsync<T>({ api }: { api: () => Promise<T> }): Promi
     const response = await api();
     return { response: response, error: null };
   } catch (e: any) {
-    if (e.response && isErrorDTO(e.response.data)) {
+    const rawData = e?.response?.data;
+    const parsed = ErrorDTOSchema.safeParse(rawData);
+
+    if(parsed.success) {
       if (e.status === 404) notFound();
       return { response: null, error: e.response.data };
     }

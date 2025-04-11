@@ -39,6 +39,7 @@ export const HireModal = (
       onClose={() => setOpenedState(false)}
       title={title}
       centered={centered}
+      radius="md"
       closeButtonProps={{
         icon: <X size={20} />
       }}

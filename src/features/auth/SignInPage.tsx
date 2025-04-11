@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Card, Center, Divider, Flex, PasswordInput, Stack, Text, TextInput } from "@mantine/core";
+import { Box, Button, Card, Center, Divider, Group, PasswordInput, Stack, Text, TextInput } from "@mantine/core";
 import useSignInForm from "@/features/auth/hooks/useSignInForm";
 import { useDisclosure } from "@mantine/hooks";
 import { At } from "@phosphor-icons/react";
@@ -19,43 +19,33 @@ export default function SignInPage() {
           <Divider my="sm" />
         </Box>
 
-        <form id="sign-in-form" onSubmit={form.onSubmit((values) => onSubmit(values))}>
+        <form onSubmit={form.onSubmit(onSubmit)}>
           <Stack>
             <TextInput
-              required
               withAsterisk
               rightSection={
                 <At color="white" />
               }
               label="Email"
               placeholder="your@email.com"
+              key={form.key("email")}
               {...form.getInputProps("email")}
             />
 
             <PasswordInput
-              required
               withAsterisk
-              /*leftSection={
-                  <IconKey className={classes.iconTextInput}/>
-              }*/
               label="Password"
               visible={visible}
               onVisibilityChange={toggle}
-              //placeholder="your@email.com"
+              key={form.key("password")}
               {...form.getInputProps("password")}
             />
           </Stack>
+
+          <Group justify="flex-end" mt="md">
+            <Button type="submit" radius="md" variant="filled">Login</Button>
+          </Group>
         </form>
-
-        <Box>
-          <Flex className={"mt-6"} justify="space-between" align="center">
-            <Box></Box>
-
-            <Button type="submit" form="sign-in-form">
-              Login
-            </Button>
-          </Flex>
-        </Box>
       </Card>
     </Center>
   );

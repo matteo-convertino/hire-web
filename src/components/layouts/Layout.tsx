@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 import LoggedLayout from "@/components/layouts/logged/LoggedLayout";
 import PublicLayout from "@/components/layouts/public/PublicLayout";
 
-
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
   const token = cookieStore.get("access-token");

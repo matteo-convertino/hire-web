@@ -6,21 +6,21 @@ import useJobPositionsFetchAllByUser from "@/features/dashboard/hooks/useJobPosi
 
 export function useJobPositionsAutoFetch(initialJobPositions: JobPositionResponseDTO[] | null) {
   const {
-    jobPositions,
-    setJobPositions
+    setJobPositions,
+    toFetchJobPositions,
+    setToFetchJobPositions,
   } = useDashboardStore();
   const { fetchAllJobPositionsByUser } = useJobPositionsFetchAllByUser();
 
   useEffect(() => setJobPositions(initialJobPositions ?? []), []);
 
   useEffect(() => {
-    if (jobPositions !== null) return;
-
-    setJobPositions([]);
+    if (!toFetchJobPositions) return;
+    setToFetchJobPositions(false);
 
     fetchAllJobPositionsByUser({
       onComplete: (jobPositions) => setJobPositions(jobPositions)
     });
 
-  }, [jobPositions]);
+  }, [toFetchJobPositions]);
 }

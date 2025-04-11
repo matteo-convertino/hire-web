@@ -18,10 +18,12 @@
     "@mantine/notifications": "^7.17.3",
     "@phosphor-icons/react": "^2.1.7",
     "axios": "^1.8.4",
+    "mantine-form-zod-resolver": "^1.1.0",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-preset-mantine": "^2.0.5",
+    "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

@@ -5,7 +5,6 @@ import { Box, Center, Text } from "@mantine/core";
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 
 export default function LogoutPage() {
-  // const { user, setUser } = useAuth();
   const { user, setUser } = useAuthStore();
   const { logout } = useLogout();
 

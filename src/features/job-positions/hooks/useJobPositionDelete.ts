@@ -14,7 +14,7 @@ export default function useJobPositionDelete() {
   }) => {
     hireApiWithNotification({
       api: () => jobPositionService.delete(id),
-      titleOnSuccess: "Job position deleted",
+      titleOnSuccess: "Job position",
       messageOnSuccess: "Job position deleted with success",
       titleOnLoading: "Deleting job position",
       messageOnLoading: "Wait while we delete your job position",

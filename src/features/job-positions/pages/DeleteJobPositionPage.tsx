@@ -12,7 +12,7 @@ export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: bo
   const { id } = useParams();
   const [opened, setOpened] = useState(false);
   const { deleteJobPosition } = useJobPositionDelete();
-  const { setJobPositions } = useDashboardStore();
+  const { setToFetchJobPositions } = useDashboardStore();
 
   const jobPositionId = parseParamToInteger(id);
   if (jobPositionId === null) {
@@ -35,7 +35,7 @@ export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: bo
           onClick={() => deleteJobPosition({
             id: jobPositionId,
             onComplete: () => {
-              setJobPositions(null);
+              setToFetchJobPositions(true);
               setOpened(false);
             }
           })}>

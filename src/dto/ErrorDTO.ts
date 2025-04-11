@@ -1,17 +1,15 @@
-export type ErrorDTO = {
-  timestamp: Date
-  status: number
-  error: string
-  message: string | { [key: string]: string } | { [key: string]: string[] }
-  path: string
-}
+import { z } from "zod";
 
-export function isErrorDTO(obj: any): obj is ErrorDTO {
-  return (
-    obj !== null &&
-    typeof obj === "object" &&
-    typeof obj.status === "number" &&
-    typeof obj.message === "string"
-  );
-}
+export const ErrorDTOSchema = z.object({
+  timestamp: z.string().transform((val) => new Date(val)),
+  status: z.number(),
+  error: z.string(),
+  path: z.string(),
+  message: z.union([
+    z.string(),
+    z.record(z.string()),
+    z.record(z.array(z.string()))
+  ])
+});
 
+export type ErrorDTO = z.infer<typeof ErrorDTOSchema>;

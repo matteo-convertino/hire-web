@@ -1,29 +1,25 @@
-import { isEmail, useForm } from "@mantine/form";
-import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useForm, zodResolver } from "@mantine/form";
 import AuthService from "@/services/AuthService";
 import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
+import { SignInRequestDTO, signInSchema } from "@/dto/request/SignInRequestDTO";
 
 export default function useSignInForm() {
   const authService = AuthService.getInstance();
   const hireApiWithNotification = useHireApiWithNotification();
-  // const { setUser } = useAuth();
   const { setUser } = useAuthStore();
 
   const form = useForm({
+    validate: zodResolver(signInSchema),
     initialValues: {
       email: "",
       password: ""
-    },
-
-    validate: {
-      email: isEmail("Invalid email")
     }
   });
 
-  const onSubmit = (data: { [x: string]: string; }) => {
+  const onSubmit = (data: SignInRequestDTO) => {
     hireApiWithNotification({
-      api: () => authService.signIn({ email: data.email, password: data.password }),
+      api: () => authService.signIn(data),
       titleOnSuccess: "Logged In",
       messageOnSuccess: "Login completed with success",
       titleOnLoading: "Login in progress",
@@ -36,7 +32,6 @@ export default function useSignInForm() {
       }
     });
   };
-
 
   return { form, onSubmit };
 }

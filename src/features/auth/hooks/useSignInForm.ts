@@ -10,6 +10,7 @@ export default function useSignInForm() {
   const { setUser } = useAuthStore();
 
   const form = useForm({
+    mode: "uncontrolled",
     validate: zodResolver(signInSchema),
     initialValues: {
       email: "",

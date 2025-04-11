@@ -11,7 +11,7 @@ export const JobPositionsGrid = (
   }: {
     jobPositions: JobPositionResponseDTO[],
     onView?: (id: number) => void
-    onEdit?: (id: number) => void
+    onEdit?: (jobPosition: JobPositionResponseDTO) => void
     onDelete?: (id: number) => void
   }) => {
   return (
@@ -22,7 +22,7 @@ export const JobPositionsGrid = (
             key={jobPosition.id}
             jobPosition={jobPosition}
             onView={onView === undefined ? undefined : () => onView(jobPosition.id)}
-            onEdit={onEdit === undefined ? undefined : () => onEdit(jobPosition.id)}
+            onEdit={onEdit === undefined ? undefined : () => onEdit(jobPosition)}
             onDelete={onDelete === undefined ? undefined : () => onDelete?.(jobPosition.id)}
           />
         )

@@ -23,9 +23,12 @@ export function callApi<T>(
     });
 }
 
-export async function callApiAsync<T>({ api }: { api: () => Promise<T> }): Promise<{
-  response: T | null;
-  error: ErrorDTO | null
+export async function callApiAsync<T>({ api, onError }: {
+  api: () => Promise<T>,
+  onError?: ((_: ErrorDTO) => void),
+}): Promise<{
+  response: T | null,
+  error: ErrorDTO | null,
 }> {
   try {
     const response = await api();
@@ -34,8 +37,10 @@ export async function callApiAsync<T>({ api }: { api: () => Promise<T> }): Promi
     const rawData = e?.response?.data;
     const parsed = ErrorDTOSchema.safeParse(rawData);
 
-    if(parsed.success) {
-      if (e.status === 404) notFound();
+    if (parsed.success) {
+      if (onError !== undefined) onError(e.response.data);
+      else if (e.status === 404) notFound();
+
       return { response: null, error: e.response.data };
     }
 

@@ -1,21 +1,73 @@
 import { notifications } from "@mantine/notifications";
 import { Check, Info, X } from "@phosphor-icons/react";
 import { ErrorDTO } from "@/dto/ErrorDTO";
+import React from "react";
+
+const showHireNotification = (
+  {
+    type,
+    title,
+    message,
+    notificationId
+  }: {
+    type: "loading" | "success" | "error" | "info",
+    title: string,
+    message: string,
+    notificationId?: string,
+  }) => {
+  const commonProps = {
+    title,
+    message,
+    loading: type === "loading",
+    withCloseButton: true,
+    autoClose: type === "loading" ? false : 2000,
+    icon: type === "error" ? <X size={16} /> : type === "success" ? <Check size={16} /> : <Info size={16} />
+  };
+
+  if (type === "loading") {
+    return notifications.show({ ...commonProps, color: "gray", autoClose: false });
+  }
+
+  if (notificationId) {
+    notifications.update({
+      id: notificationId,
+      ...commonProps,
+      color: type === "error" ? "red" : type === "success" ? "teal" : "blue"
+    });
+  } else {
+    notifications.show({
+      ...commonProps,
+      color: type === "error" ? "red" : type === "success" ? "teal" : "blue"
+    });
+  }
+};
+
+export const showHireLoadingNotification = ({ title, message }: { title: string, message: string }) => {
+  return showHireNotification({
+    type: "loading",
+    title,
+    message
+  });
+};
+
+export const showHireSuccessNotification = ({ title, message }: { title: string, message: string }) => {
+  return showHireNotification({
+    type: "success",
+    title,
+    message
+  });
+};
 
 export const updateHireSuccessNotification = ({ notificationId, title, message }: {
   notificationId: string,
   title: string,
   message: string
 }) => {
-  notifications.update({
-    id: notificationId,
-    color: "teal",
-    title: title,
-    message: message,
-    icon: <Check size={16} />,
-    loading: false,
-    withCloseButton: true,
-    autoClose: 2000
+  return showHireNotification({
+    type: "success",
+    title,
+    message,
+    notificationId
   });
 };
 
@@ -24,45 +76,27 @@ export const updateHireErrorNotification = ({ notificationId, title, message }: 
   title: string,
   message: string
 }) => {
-  notifications.update({
-    id: notificationId,
-    color: "red",
-    title: title,
-    message: message,
-    icon: <X size={16} />,
-    loading: false,
-    withCloseButton: true,
-    autoClose: 2000
+  return showHireNotification({
+    type: "error",
+    title,
+    message,
+    notificationId
   });
 };
 
-export const showHireErrorNotification = ({ title, message }: {
-  title: string,
-  message: string
-}) => {
-  notifications.show({
-    color: "red",
-    title: title,
-    message: message,
-    icon: <X size={16} />,
-    loading: false,
-    withCloseButton: true,
-    autoClose: 2000
+export const showHireErrorNotification = ({ title, message }: { title: string, message: string }) => {
+  return showHireNotification({
+    type: "error",
+    title,
+    message
   });
 };
 
-export const showHireInfoNotification = ({ title, message }: {
-  title: string,
-  message: string
-}) => {
-  notifications.show({
-    color: "blue",
-    title: title,
-    message: message,
-    icon: <Info size={16} />,
-    loading: false,
-    withCloseButton: true,
-    autoClose: 2000
+export const showHireInfoNotification = ({ title, message }: { title: string, message: string }) => {
+  return showHireNotification({
+    type: "info",
+    title,
+    message
   });
 };
 
@@ -76,21 +110,13 @@ export const showHireErrors = ({ notificationId, errorDTO }: {
       message: "Internal server error"
     });
   } else {
-    const title = errorDTO.error;
-    const message = errorDTO.message;
+    const { error: title, message } = errorDTO;
 
     if (typeof message === "string") {
       if (notificationId === null) {
-        showHireErrorNotification({
-          title: title,
-          message: message
-        });
+        showHireErrorNotification({ title, message });
       } else {
-        updateHireErrorNotification({
-          notificationId: notificationId,
-          title: title,
-          message: message
-        });
+        updateHireErrorNotification({ notificationId, title, message });
       }
     } else if (typeof message === "object") {
       if (notificationId !== null) notifications.hide(notificationId);
@@ -99,17 +125,9 @@ export const showHireErrors = ({ notificationId, errorDTO }: {
         const value = message[key];
 
         if (typeof value === "string") {
-          showHireErrorNotification({
-            title: title,
-            message: value
-          });
+          showHireErrorNotification({ title, message: value });
         } else if (Array.isArray(value)) {
-          value.forEach((msg) => {
-            showHireErrorNotification({
-              title: title,
-              message: msg
-            });
-          });
+          value.forEach((msg) => showHireErrorNotification({ title, message: msg }));
         }
       }
     }

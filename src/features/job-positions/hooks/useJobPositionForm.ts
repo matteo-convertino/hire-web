@@ -36,7 +36,7 @@ export default function useJobPositionForm() {
     hireApiWithNotification({
       api: () => isEdit ? jobPositionService.update(jobPositionId!, data) : jobPositionService.save(data),
       titleOnSuccess: "Job position",
-      messageOnSuccess: `Job position ${isEdit ? "update" : "created"} with success`,
+      messageOnSuccess: `Job position ${isEdit ? "updated" : "created"} with success`,
       titleOnLoading: "Job position",
       messageOnLoading: `Wait while we ${isEdit ? "update" : "create"} your job position`,
       messageOnGenericError: `There was an error while trying to ${isEdit ? "update" : "create"} job position`,

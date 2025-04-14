@@ -5,7 +5,7 @@ import { fetchJobPositionById } from "@/features/job-positions/api/fetchJobPosit
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { response, error } = await fetchJobPositionById(id);
+  const { response, error } = await fetchJobPositionById({ idString: id });
 
   return <DetailJobPositionPage jobPosition={response} error={error} />;
 }

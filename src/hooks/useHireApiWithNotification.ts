@@ -4,7 +4,7 @@ import { notifications } from "@mantine/notifications";
 import { callApi } from "@/utils/callApi";
 import {
   showHireErrors,
-  showHireInfoNotification,
+  showHireInfoNotification, showHireLoadingNotification,
   updateHireErrorNotification,
   updateHireSuccessNotification
 } from "@/utils/hireNotifications";
@@ -37,12 +37,9 @@ export default function useHireApiWithNotification() {
       onGenericError?: null | ((_: unknown) => void)
     }): void {
 
-    const notificationId = notifications.show({
-      loading: true,
+    const notificationId = showHireLoadingNotification({
       title: titleOnLoading,
-      message: messageOnLoading,
-      autoClose: false,
-      withCloseButton: false
+      message: messageOnLoading
     });
 
     callApi<T>(

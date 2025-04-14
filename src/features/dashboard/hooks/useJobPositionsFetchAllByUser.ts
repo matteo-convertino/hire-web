@@ -1,21 +1,16 @@
 import JobPositionService from "@/services/JobPositionService";
-import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
+import useHireApi from "@/hooks/useHireApi";
 
 export default function useJobPositionsFetchAllByUser() {
   const jobPositionService = JobPositionService.getInstance();
-  const hireApiWithNotification = useHireApiWithNotification();
+  const hireApi = useHireApi();
 
   const fetchAllJobPositionsByUser = ({ onComplete }: {
     onComplete: ((_: JobPositionResponseDTO[]) => void) | null | undefined
   }) => {
-    hireApiWithNotification({
+    hireApi({
       api: () => jobPositionService.getAllByUser(),
-      titleOnSuccess: "Job positions",
-      messageOnSuccess: "Job positions fetched with success",
-      titleOnLoading: "Fetching job positions",
-      messageOnLoading: "Wait while we fetch your job positions",
-      messageOnGenericError: "There was an error while trying to fetch job positions",
       onComplete: onComplete
     });
   };

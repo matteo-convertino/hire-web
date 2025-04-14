@@ -42,7 +42,8 @@ export default class SkillService {
 
   public async update(id: number, skillUpdateRequestDTO: SkillUpdateRequestDTO): Promise<SkillResponseDTO> {
     return hireApiClient.put<SkillResponseDTO>(
-      SkillRoutes.UPDATE(id)
+      SkillRoutes.UPDATE(id),
+      skillUpdateRequestDTO
     ).then(res => res.data);
   }
 

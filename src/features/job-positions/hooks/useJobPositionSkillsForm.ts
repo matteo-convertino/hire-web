@@ -43,7 +43,7 @@ export default function useJobPositionSkillsForm({ jobPositionId, isEdit = false
     const notificationId = showHireLoadingNotification({
       title: "Skills",
       message: `Wait while we ${isEdit ? "update" : "create"} your skills`
-    });
+    })!;
 
     Promise.all(
       data.map((skill) =>

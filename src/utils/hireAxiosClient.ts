@@ -1,6 +1,7 @@
 import axios from "axios";
+import HireCookieService from "@/services/utils/HireCookieService";
 
-const hireApiClient = axios.create({
+const hireAxiosClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
@@ -10,7 +11,7 @@ const hireApiClient = axios.create({
 
 // If it is a server-side call, it moves the JWT from the (client's) cookies to the Authorization field of the header
 if(typeof window === 'undefined') {
-  hireApiClient.interceptors.request.use(async (config) => {
+  hireAxiosClient.interceptors.request.use(async (config) => {
     const { cookies } = await import('next/headers');
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("access-token")?.value;
@@ -25,4 +26,4 @@ if(typeof window === 'undefined') {
   });
 }
 
-export default hireApiClient;
+export default hireAxiosClient;

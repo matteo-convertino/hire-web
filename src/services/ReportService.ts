@@ -1,4 +1,4 @@
-import hireApiClient from "@/utils/hireApiClient";
+import hireAxiosClient from "@/utils/hireAxiosClient";
 import { SkillResponseDTO } from "@/dto/response/SkillResponseDTO";
 import { InterviewResponseDTO } from "@/dto/response/InterviewResponseDTO";
 import { ReportRoutes } from "@/utils/routes/reportRoutes";
@@ -18,19 +18,19 @@ export default class ReportService {
   }
 
   public async getById(id: number): Promise<InterviewResponseDTO> {
-    return hireApiClient.get<InterviewResponseDTO>(
+    return hireAxiosClient.get<InterviewResponseDTO>(
       ReportRoutes.FIND_BY_ID(id)
     ).then(res => res.data);
   }
 
   public async getByIdByInterviewId(interviewId: number): Promise<SkillResponseDTO> {
-    return hireApiClient.get<SkillResponseDTO>(
+    return hireAxiosClient.get<SkillResponseDTO>(
       ReportRoutes.FIND_BY_INTERVIEW_ID(interviewId)
     ).then(res => res.data);
   }
 
   public async getAllByUser(): Promise<InterviewResponseDTO[]> {
-    return hireApiClient.put<InterviewResponseDTO[]>(
+    return hireAxiosClient.put<InterviewResponseDTO[]>(
       ReportRoutes.FIND_ALL_BY_USER
     ).then(res => res.data);
   }

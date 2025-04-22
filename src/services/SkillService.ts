@@ -1,4 +1,4 @@
-import hireApiClient from "@/utils/hireApiClient";
+import hireAxiosClient from "@/utils/hireAxiosClient";
 import { JobPositionRoutes } from "@/utils/routes/jobPositionRoutes";
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 import { JobPositionRequestDTO } from "@/dto/request/JobPositionRequestDTO";
@@ -22,33 +22,33 @@ export default class SkillService {
   }
 
   public async save(skillRequestDTO: SkillRequestDTO): Promise<SkillResponseDTO> {
-    return hireApiClient.post<SkillResponseDTO>(
+    return hireAxiosClient.post<SkillResponseDTO>(
       SkillRoutes.SAVE,
       skillRequestDTO
     ).then(res => res.data);
   }
 
   public async getById(id: number): Promise<SkillResponseDTO> {
-    return hireApiClient.get<SkillResponseDTO>(
+    return hireAxiosClient.get<SkillResponseDTO>(
       SkillRoutes.FIND_BY_ID(id)
     ).then(res => res.data);
   }
 
   public async getByIdByJobPositionId(jobPositionId: number): Promise<SkillResponseDTO> {
-    return hireApiClient.get<SkillResponseDTO>(
+    return hireAxiosClient.get<SkillResponseDTO>(
       SkillRoutes.FIND_BY_JOB_POSITION_ID(jobPositionId)
     ).then(res => res.data);
   }
 
   public async update(id: number, skillUpdateRequestDTO: SkillUpdateRequestDTO): Promise<SkillResponseDTO> {
-    return hireApiClient.put<SkillResponseDTO>(
+    return hireAxiosClient.put<SkillResponseDTO>(
       SkillRoutes.UPDATE(id),
       skillUpdateRequestDTO
     ).then(res => res.data);
   }
 
   public async delete(id: number): Promise<SkillResponseDTO> {
-    return hireApiClient.delete<SkillResponseDTO>(
+    return hireAxiosClient.delete<SkillResponseDTO>(
       SkillRoutes.DELETE(id)
     ).then(res => res.data);
   }

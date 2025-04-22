@@ -1,4 +1,4 @@
-import hireApiClient from "@/utils/hireApiClient";
+import hireAxiosClient from "@/utils/hireAxiosClient";
 import { SkillResponseDTO } from "@/dto/response/SkillResponseDTO";
 import { InterviewResponseDTO } from "@/dto/response/InterviewResponseDTO";
 import { InterviewRequestDTO } from "@/dto/request/InterviewRequestDTO";
@@ -19,26 +19,26 @@ export default class InterviewService {
   }
 
   public async save(interviewRequestDTO: InterviewRequestDTO): Promise<InterviewResponseDTO> {
-    return hireApiClient.post<InterviewResponseDTO>(
+    return hireAxiosClient.post<InterviewResponseDTO>(
       InterviewRoutes.SAVE,
       interviewRequestDTO
     ).then(res => res.data);
   }
 
   public async getById(id: number): Promise<InterviewResponseDTO> {
-    return hireApiClient.get<InterviewResponseDTO>(
+    return hireAxiosClient.get<InterviewResponseDTO>(
       InterviewRoutes.FIND_BY_ID(id)
     ).then(res => res.data);
   }
 
   public async getByIdByJobPositionId(jobPositionId: number): Promise<SkillResponseDTO> {
-    return hireApiClient.get<SkillResponseDTO>(
+    return hireAxiosClient.get<SkillResponseDTO>(
       InterviewRoutes.FIND_BY_JOB_POSITION_ID(jobPositionId)
     ).then(res => res.data);
   }
 
   public async getAllByUser(): Promise<InterviewResponseDTO[]> {
-    return hireApiClient.put<InterviewResponseDTO[]>(
+    return hireAxiosClient.put<InterviewResponseDTO[]>(
       InterviewRoutes.FIND_ALL_BY_USER
     ).then(res => res.data);
   }

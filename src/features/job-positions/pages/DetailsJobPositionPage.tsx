@@ -10,9 +10,10 @@ import useSignUpGuestForm from "@/features/auth/hooks/useSignUpGuestForm";
 import ModalSignUpGuest from "@/features/job-positions/components/details/modal/ModalSignUpGuest";
 import ModalConfirm from "@/features/job-positions/components/details/modal/ModalConfirm";
 
-export default function DetailsJobPositionPage({ jobPosition, error }: {
+export default function DetailsJobPositionPage({ jobPosition, error, isOwner }: {
   jobPosition: JobPositionResponseDTO | null,
-  error: ErrorDTO | null
+  error: ErrorDTO | null,
+  isOwner: boolean,
 }) {
   const { form, onSubmit } = useSignUpGuestForm();
   const stack = useModalsStack(["sign-up-guest", "confirm-action"]);

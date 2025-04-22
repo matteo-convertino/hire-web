@@ -1,6 +1,6 @@
 "use client";
 
-import { HireModal } from "@/components/HireModal";
+import { HirePageModal } from "@/components/HirePageModal";
 import { useState } from "react";
 import { Button, Group, Text } from "@mantine/core";
 import { parseParamToInteger } from "@/utils/parseParamToInteger";
@@ -21,7 +21,7 @@ export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: bo
   }
 
   return (
-    <HireModal
+    <HirePageModal
       title="Delete Confirmation" isFirstPage={isFirstPage} opened={opened} setOpened={setOpened}>
       <Text>
         Are you sure you want to delete this item?
@@ -42,6 +42,6 @@ export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: bo
           Delete
         </Button>
       </Group>
-    </HireModal>
+    </HirePageModal>
   );
 }

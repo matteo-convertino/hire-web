@@ -12,7 +12,7 @@ export default function JobPositionSkillsForm({ form, isEdit = false }: {
   const skills = form.getValues()
     .skills
     .map(
-      (item, index) => <JobPositionSkillForm key={item.key} skill={item} form={form} index={index} />
+      (item, index) => <JobPositionSkillForm key={item.key} form={form} index={index} />
     );
 
   return (

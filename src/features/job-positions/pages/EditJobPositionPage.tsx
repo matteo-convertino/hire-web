@@ -1,6 +1,6 @@
 "use client";
 
-import { HireModal } from "@/components/HireModal";
+import { HirePageModal } from "@/components/HirePageModal";
 import { useEffect, useState } from "react";
 import { parseParamToInteger } from "@/utils/parseParamToInteger";
 import { useParams } from "next/navigation";
@@ -40,7 +40,7 @@ export default function EditJobPositionPage({ initialJobPosition }: {
   }, []);
 
   return (
-    <HireModal
+    <HirePageModal
       title="Edit job position" isFirstPage={initialJobPosition !== null} opened={opened} setOpened={setOpened}>
       <form onSubmit={
         form.onSubmit((values) => onSubmit({
@@ -55,6 +55,6 @@ export default function EditJobPositionPage({ initialJobPosition }: {
         )}>
         <JobPositionForm form={form} isEdit={true} />
       </form>
-    </HireModal>
+    </HirePageModal>
   );
 }

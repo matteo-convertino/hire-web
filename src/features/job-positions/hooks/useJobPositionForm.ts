@@ -19,7 +19,7 @@ export default function useJobPositionForm() {
         ...jobPosition,
         lastMessage: jobPosition.lastMessage === "" ? null : jobPosition.lastMessage,
         evaluationCriteria: jobPosition.evaluationCriteria === "" ? null : jobPosition.evaluationCriteria
-      })
+      });
     }
   });
 
@@ -29,7 +29,7 @@ export default function useJobPositionForm() {
   const onSubmit = async ({ jobPositionId, data, onComplete }: {
     jobPositionId?: number,
     data: JobPositionRequestDTO,
-    onComplete: ((_: JobPositionResponseDTO) => void) | null | undefined,
+    onComplete?: (_: JobPositionResponseDTO) => void,
   }) => {
     let isEdit = jobPositionId !== undefined;
 

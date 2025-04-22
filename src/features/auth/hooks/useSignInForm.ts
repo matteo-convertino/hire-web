@@ -9,7 +9,7 @@ export default function useSignInForm() {
   const hireApiWithNotification = useHireApiWithNotification();
   const { setUser } = useAuthStore();
 
-  const form = useForm({
+  const form = useForm<SignInRequestDTO>({
     mode: "uncontrolled",
     validate: zodResolver(signInSchema),
     initialValues: {

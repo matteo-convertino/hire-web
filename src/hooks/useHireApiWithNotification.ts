@@ -1,17 +1,16 @@
-import { useAuth } from "@/features/auth/hooks/useAuth";
 import { ErrorDTO } from "@/dto/ErrorDTO";
 import { notifications } from "@mantine/notifications";
 import { callApi } from "@/utils/callApi";
 import {
   showHireErrors,
-  showHireInfoNotification, showHireLoadingNotification,
+  showHireInfoNotification,
+  showHireLoadingNotification,
   updateHireErrorNotification,
   updateHireSuccessNotification
 } from "@/utils/hireNotifications";
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 
 export default function useHireApiWithNotification() {
-  // const { setUser } = useAuth();
   const { setUser } = useAuthStore();
 
   function send<T>(

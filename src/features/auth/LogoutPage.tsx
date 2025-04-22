@@ -1,4 +1,3 @@
-import { useAuth } from "@/features/auth/hooks/useAuth";
 import useLogout from "@/features/auth/hooks/useLogout";
 import { useEffect } from "react";
 import { Box, Center, Text } from "@mantine/core";

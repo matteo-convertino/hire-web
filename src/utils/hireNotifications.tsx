@@ -47,7 +47,7 @@ export const showHireLoadingNotification = ({ title, message }: { title: string,
     type: "loading",
     title,
     message
-  });
+  })!;
 };
 
 export const showHireSuccessNotification = ({ title, message }: { title: string, message: string }) => {
@@ -55,7 +55,7 @@ export const showHireSuccessNotification = ({ title, message }: { title: string,
     type: "success",
     title,
     message
-  });
+  })!;
 };
 
 export const updateHireSuccessNotification = ({ notificationId, title, message }: {
@@ -89,7 +89,7 @@ export const showHireErrorNotification = ({ title, message }: { title: string, m
     type: "error",
     title,
     message
-  });
+  })!;
 };
 
 export const showHireInfoNotification = ({ title, message }: { title: string, message: string }) => {
@@ -97,7 +97,7 @@ export const showHireInfoNotification = ({ title, message }: { title: string, me
     type: "info",
     title,
     message
-  });
+  })!;
 };
 
 export const showHireErrors = ({ notificationId, errorDTO }: {

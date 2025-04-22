@@ -1,6 +1,6 @@
 "use client";
 
-import { HireModal } from "@/components/HireModal";
+import { HirePageModal } from "@/components/HirePageModal";
 import useJobPositionForm from "@/features/job-positions/hooks/useJobPositionForm";
 import JobPositionForm from "@/features/job-positions/components/JobPositionForm";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ export default function AddJobPositionPage({ isFirstPage }: { isFirstPage: boole
   const { setToFetchJobPositions } = useDashboardStore();
 
   return (
-    <HireModal
+    <HirePageModal
       title="Create job position"
       isFirstPage={isFirstPage}
     >
@@ -28,6 +28,6 @@ export default function AddJobPositionPage({ isFirstPage }: { isFirstPage: boole
         )}>
         <JobPositionForm form={form} />
       </form>
-    </HireModal>
+    </HirePageModal>
   );
 }

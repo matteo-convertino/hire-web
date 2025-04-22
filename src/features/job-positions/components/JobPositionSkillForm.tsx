@@ -1,9 +1,8 @@
 import { UseFormReturnType } from "@mantine/form";
-import { ActionIcon, Group, Textarea, TextInput } from "@mantine/core";
+import { ActionIcon, Group, Textarea } from "@mantine/core";
 import { Trash } from "@phosphor-icons/react";
 
-export default function JobPositionSkillForm({ skill, form, index }: {
-  skill: { description: string, key: string },
+export default function JobPositionSkillForm({ form, index }: {
   form: UseFormReturnType<{ skills: { description: string, key: string }[] }>,
   index: number,
 }) {

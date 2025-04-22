@@ -1,6 +1,6 @@
 "use client";
 
-import { HireModal } from "@/components/HireModal";
+import { HirePageModal } from "@/components/HirePageModal";
 import useJobPositionForm from "@/features/job-positions/hooks/useJobPositionForm";
 import { useState } from "react";
 import { useDashboardStore } from "@/features/dashboard/stores/useDashboardStore";
@@ -23,7 +23,7 @@ export default function AddJobPositionSkillsPage({ isFirstPage }: { isFirstPage:
   const { form, onSubmit } = useJobPositionSkillsForm({ jobPositionId: jobPositionId });
 
   return (
-    <HireModal
+    <HirePageModal
       title="Add skills"
       size="xl"
       isFirstPage={isFirstPage}
@@ -42,6 +42,6 @@ export default function AddJobPositionSkillsPage({ isFirstPage }: { isFirstPage:
         )}>
         <JobPositionSkillsForm form={form} />
       </form>
-    </HireModal>
+    </HirePageModal>
   );
 }

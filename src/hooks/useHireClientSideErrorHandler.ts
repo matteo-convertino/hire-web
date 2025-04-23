@@ -4,7 +4,7 @@ import { ErrorDTO } from "@/dto/ErrorDTO";
 import { useEffect } from "react";
 import { showHireErrors } from "@/utils/hireNotifications";
 
-export function useHireClientErrorHandler(error: ErrorDTO | null) {
+export function useHireClientSideErrorHandler(error: ErrorDTO | null) {
   useEffect(() => {
     if (error === null) return;
 

@@ -2,17 +2,17 @@ import { UseFormReturnType } from "@mantine/form";
 import { Button, Group, ScrollArea, Stack, Text } from "@mantine/core";
 import { Plus } from "@phosphor-icons/react";
 import { randomId } from "@mantine/hooks";
-import JobPositionSkillForm from "@/features/job-positions/components/JobPositionSkillForm";
+import SkillForm from "@/features/skills/components/SkillForm";
+import { AddSkillsFormTransformFunction, AddSkillsFormValues } from "@/features/skills/hooks/useSkillsAdd";
 
-export default function JobPositionSkillsForm({ form, isEdit = false }: {
-  form: UseFormReturnType<{ skills: { description: string, key: string }[] }>,
-  isEdit?: boolean,
+export default function SkillsForm({ form }: {
+  form: UseFormReturnType<AddSkillsFormValues, AddSkillsFormTransformFunction>,
 }) {
 
   const skills = form.getValues()
     .skills
     .map(
-      (item, index) => <JobPositionSkillForm key={item.key} form={form} index={index} />
+      (item, index) => <SkillForm key={item.key} form={form} index={index} />
     );
 
   return (
@@ -30,7 +30,7 @@ export default function JobPositionSkillsForm({ form, isEdit = false }: {
           <Plus />
           <Text size="sm" ml="xs">Add skill</Text>
         </Button>
-        <Button type="submit" radius="md" variant="filled">{isEdit ? "Update" : "Create"}</Button>
+        <Button type="submit" radius="md" variant="filled">Create</Button>
       </Group>
     </>
   );

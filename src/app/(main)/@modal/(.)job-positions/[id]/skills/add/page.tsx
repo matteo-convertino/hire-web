@@ -1,5 +1,5 @@
-import AddJobPositionSkillsPage from "@/features/job-positions/pages/AddJobPositionSkillsPage";
+import AddSkillsPage from "@/features/skills/pages/AddSkillsPage";
 
 export default function Page() {
-  return <AddJobPositionSkillsPage isFirstPage={false} />;
+  return <AddSkillsPage isFirstPage={false} />;
 }

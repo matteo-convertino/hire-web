@@ -3,7 +3,7 @@
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 import { ErrorDTO } from "@/dto/ErrorDTO";
 import { useRouter } from "next/navigation";
-import { useHireClientErrorHandler } from "@/hooks/useHireClientErrorHandler";
+import { useHireClientSideErrorHandler } from "@/hooks/useHireClientSideErrorHandler";
 import { JobPositionsGrid } from "@/features/job-positions/components/JobPositionsGrid";
 import { useDashboardStore } from "@/features/dashboard/stores/useDashboardStore";
 import { useJobPositionsAutoFetch } from "@/features/dashboard/hooks/useJobPositionsAutoFetch";
@@ -17,7 +17,7 @@ export default function DashboardPage({ initialJobPositions, error }: {
   const { jobPositions } = useDashboardStore();
   const { setJobPosition } = useJobPositionEditStore();
 
-  useHireClientErrorHandler(error);
+  useHireClientSideErrorHandler(error);
   useJobPositionsAutoFetch(initialJobPositions);
 
   return (

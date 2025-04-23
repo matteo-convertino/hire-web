@@ -6,10 +6,10 @@ import { useState } from "react";
 import { useDashboardStore } from "@/features/dashboard/stores/useDashboardStore";
 import { useParams } from "next/navigation";
 import { parseParamToInteger } from "@/utils/parseParamToInteger";
-import JobPositionSkillsForm from "@/features/job-positions/components/JobPositionSkillsForm";
-import useJobPositionSkillsForm from "@/features/job-positions/hooks/useJobPositionSkillsForm";
+import SkillsForm from "@/features/skills/components/SkillsForm";
+import useSkillsAdd from "@/features/skills/hooks/useSkillsAdd";
 
-export default function AddJobPositionSkillsPage({ isFirstPage }: { isFirstPage: boolean }) {
+export default function AddSkillsPage({ isFirstPage }: { isFirstPage: boolean }) {
   const { id } = useParams();
   const [opened, setOpened] = useState(false);
   const { setToFetchJobPositions } = useDashboardStore();
@@ -20,7 +20,7 @@ export default function AddJobPositionSkillsPage({ isFirstPage }: { isFirstPage:
     return;
   }
 
-  const { form, onSubmit } = useJobPositionSkillsForm({ jobPositionId: jobPositionId });
+  const { form, onSubmit } = useSkillsAdd({ jobPositionId: jobPositionId });
 
   return (
     <HirePageModal
@@ -40,7 +40,7 @@ export default function AddJobPositionSkillsPage({ isFirstPage }: { isFirstPage:
             }
           })
         )}>
-        <JobPositionSkillsForm form={form} />
+        <SkillsForm form={form} />
       </form>
     </HirePageModal>
   );

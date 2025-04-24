@@ -1,5 +1,6 @@
 import { Button, Paper, Text, Title } from "@mantine/core";
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
+import { HireButton } from "@/components/HireButton";
 
 export default function PaperJobPosition({ jobPosition, onApply }: {
   jobPosition: JobPositionResponseDTO,
@@ -12,16 +13,13 @@ export default function PaperJobPosition({ jobPosition, onApply }: {
 
       <Text fw={500}>{jobPosition.description}</Text>
 
-      <Button
+      <HireButton
+        label="Apply now"
         disabled={onApply === undefined}
         onClick={onApply}
-        radius="md"
         mt="md"
-        variant="filled"
         fullWidth
-      >
-        Apply now
-      </Button>
+      />
     </Paper>
   );
 }

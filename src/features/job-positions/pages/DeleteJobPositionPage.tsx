@@ -7,6 +7,7 @@ import { parseParamToInteger } from "@/utils/parseParamToInteger";
 import { useParams } from "next/navigation";
 import { useDashboardStore } from "@/features/dashboard/stores/useDashboardStore";
 import useJobPositionDelete from "@/features/job-positions/hooks/useJobPositionDelete";
+import { HireButton } from "@/components/HireButton";
 
 export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: boolean }) {
   const { id } = useParams();
@@ -28,9 +29,14 @@ export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: bo
         This action cannot be undone.
       </Text>
       <Group justify="flex-end" mt="md">
-        <Button variant="outline" color="red" onClick={() => setOpened(false)}>Cancel</Button>
-        <Button
-          variant="filled"
+        <HireButton
+          label="Cancel"
+          variant="outline"
+          color="red"
+          onClick={() => setOpened(false)}
+        />
+        <HireButton
+          label="Delete"
           color="red"
           onClick={() => deleteJobPosition({
             id: jobPositionId,
@@ -38,9 +44,8 @@ export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: bo
               setToFetchJobPositions(true);
               setOpened(false);
             }
-          })}>
-          Delete
-        </Button>
+          })}
+        />
       </Group>
     </HirePageModal>
   );

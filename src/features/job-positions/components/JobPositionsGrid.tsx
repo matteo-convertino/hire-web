@@ -5,9 +5,9 @@ import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 export const JobPositionsGrid = (
   {
     jobPositions = [],
-    onView = undefined,
-    onEdit = undefined,
-    onDelete = undefined
+    onView,
+    onEdit,
+    onDelete
   }: {
     jobPositions: JobPositionResponseDTO[],
     onView?: (id: number) => void

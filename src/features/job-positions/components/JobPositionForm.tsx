@@ -1,30 +1,41 @@
 import { JobPositionRequestDTO } from "@/dto/request/JobPositionRequestDTO";
 import { UseFormReturnType } from "@mantine/form";
 import { Button, Group, Stack, Textarea, TextInput } from "@mantine/core";
+import { HireButton } from "@/components/HireButton";
 
-export default function JobPositionForm({ form, isEdit = false }: {
+export default function JobPositionForm({ form, isEdit = false, onlyOtherInfo = false, disabled = false }: {
   form: UseFormReturnType<JobPositionRequestDTO>,
   isEdit?: boolean,
+  onlyOtherInfo?: boolean,
+  disabled?: boolean
 }) {
   return (
     <>
       <Stack>
-        <TextInput
-          radius="md"
-          label="Title"
-          withAsterisk
-          key={form.key("title")}
-          {...form.getInputProps("title")}
-        />
+        {
+          !onlyOtherInfo &&
+          <>
+            <TextInput
+              disabled={disabled}
+              radius="md"
+              label="Title"
+              withAsterisk
+              key={form.key("title")}
+              {...form.getInputProps("title")}
+            />
+            <Textarea
+              disabled={disabled}
+              radius="md"
+              label="Description"
+              resize="vertical"
+              withAsterisk
+              key={form.key("description")}
+              {...form.getInputProps("description")}
+            />
+          </>
+        }
         <Textarea
-          radius="md"
-          label="Description"
-          resize="vertical"
-          withAsterisk
-          key={form.key("description")}
-          {...form.getInputProps("description")}
-        />
-        <Textarea
+          disabled={disabled}
           radius="md"
           label="End message"
           resize="vertical"
@@ -32,6 +43,7 @@ export default function JobPositionForm({ form, isEdit = false }: {
           {...form.getInputProps("lastMessage")}
         />
         <Textarea
+          disabled={disabled}
           radius="md"
           label="Evaluation criteria"
           resize="vertical"
@@ -39,9 +51,16 @@ export default function JobPositionForm({ form, isEdit = false }: {
           {...form.getInputProps("evaluationCriteria")}
         />
       </Stack>
-      <Group justify="flex-end" mt="md">
-        <Button type="submit" radius="md" variant="filled">{isEdit ? "Update" : "Create"}</Button>
-      </Group>
+      {
+        !onlyOtherInfo &&
+        <Group justify="flex-end" mt="md">
+          <HireButton
+            label={isEdit ? "Update" : "Create"}
+            type="submit"
+            disabled={disabled}
+          />
+        </Group>
+      }
     </>
   );
 

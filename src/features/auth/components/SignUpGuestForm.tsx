@@ -2,6 +2,7 @@ import { UseFormReturnType } from "@mantine/form";
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { At } from "@phosphor-icons/react";
 import { SignUpGuestRequestDTO } from "@/dto/request/SignUpGuestRequestDTO";
+import { HireButton } from "@/components/HireButton";
 
 export default function SignUpGuestForm({ form }: { form: UseFormReturnType<SignUpGuestRequestDTO> }) {
 
@@ -35,7 +36,7 @@ export default function SignUpGuestForm({ form }: { form: UseFormReturnType<Sign
       </Stack>
 
       <Group justify="flex-end" mt="md">
-        <Button type="submit" radius="md" variant="filled">Apply now</Button>
+        <HireButton label="Apply now" type="submit" />
       </Group>
     </>
   );

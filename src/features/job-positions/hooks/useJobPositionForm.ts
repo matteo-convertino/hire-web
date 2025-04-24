@@ -4,15 +4,15 @@ import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
 import { JobPositionRequestDTO, jobPositionSchema } from "@/dto/request/JobPositionRequestDTO";
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 
-export default function useJobPositionForm() {
+export default function useJobPositionForm({ initialJobPosition } : { initialJobPosition?: JobPositionRequestDTO } = {}) {
   const form = useForm<JobPositionRequestDTO>({
     mode: "uncontrolled",
     validate: zodResolver(jobPositionSchema),
     initialValues: {
-      title: "",
-      description: "",
-      lastMessage: null,
-      evaluationCriteria: null
+      title: initialJobPosition?.title ?? "",
+      description: initialJobPosition?.description ?? "",
+      lastMessage: initialJobPosition?.lastMessage ?? null,
+      evaluationCriteria: initialJobPosition?.evaluationCriteria ?? null
     },
     transformValues: (jobPosition) => {
       return ({

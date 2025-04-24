@@ -3,6 +3,7 @@ import { Button, Group, PasswordInput, Stack, TextInput } from "@mantine/core";
 import { At } from "@phosphor-icons/react";
 import { useDisclosure } from "@mantine/hooks";
 import { SignInRequestDTO } from "@/dto/request/SignInRequestDTO";
+import { HireButton } from "@/components/HireButton";
 
 export default function SignInForm({ form }: { form: UseFormReturnType<SignInRequestDTO> }) {
   const [visible, { toggle }] = useDisclosure(false);
@@ -32,7 +33,7 @@ export default function SignInForm({ form }: { form: UseFormReturnType<SignInReq
       </Stack>
 
       <Group justify="flex-end" mt="md">
-        <Button type="submit" radius="md" variant="filled">Login</Button>
+        <HireButton label="Login" type="submit" />
       </Group>
     </>
   );

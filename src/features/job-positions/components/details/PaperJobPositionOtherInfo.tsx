@@ -9,53 +9,25 @@ import { randomId } from "@mantine/hooks";
 import { AddSkillsFormTransformFunction, AddSkillsFormValues } from "@/features/skills/hooks/useSkillsAdd";
 import { UpdateSkillsFormTransformFunction, UpdateSkillsFormValues } from "@/features/skills/hooks/useSkillUpdate";
 import { SkillUpdateRequestDTO } from "@/dto/request/SkillUpdateRequestDTO";
+import { JobPositionRequestDTO } from "@/dto/request/JobPositionRequestDTO";
+import JobPositionForm from "@/features/job-positions/components/JobPositionForm";
 import { HireButton } from "@/components/HireButton";
 
-export default function PaperJobPositionSkills(
+export default function PaperJobPositionOtherInfo(
   {
-    updateSkillsForm,
-    addSkillsForm,
+    jobPositionForm,
     isEditing,
-    setIsEditing,
-    onDelete,
-    onEdit
+    setIsEditing
   }: {
-    addSkillsForm: UseFormReturnType<AddSkillsFormValues, AddSkillsFormTransformFunction>,
-    updateSkillsForm: UseFormReturnType<UpdateSkillsFormValues, UpdateSkillsFormTransformFunction>
+    jobPositionForm: UseFormReturnType<JobPositionRequestDTO>
     isEditing: boolean;
     setIsEditing: Dispatch<SetStateAction<boolean>>;
-    onDelete: (id: number) => void;
-    onEdit: (index: number) => void;
   }) {
-
-  const updatedSkillsMapped = updateSkillsForm.getValues()
-    .skills
-    .map(
-      (skill, index) => <SkillForm
-        key={skill.key}
-        form={updateSkillsForm}
-        index={index}
-        disabled={!isEditing}
-        onDelete={() => onDelete(skill.id)}
-        onEdit={() => onEdit(index)}
-      />
-    );
-
-  const addedSkillsMapped = addSkillsForm.getValues()
-    .skills
-    .map(
-      (skill, index) => <SkillForm
-        key={skill.key}
-        form={addSkillsForm}
-        index={index}
-        canBeEmpty={true}
-      />
-    );
 
   return (
     <Paper mt="md" shadow="xs" radius="md" withBorder p="lg">
       <Group justify="space-between">
-        <Title>Skills</Title>
+        <Title>Other Info</Title>
         {isEditing ?
           <Group>
             <HireButton
@@ -64,19 +36,10 @@ export default function PaperJobPositionSkills(
               type="submit"
               variant="default"
               onClick={() => {
-                addSkillsForm.reset();
-                updateSkillsForm.reset();
+                jobPositionForm.reset();
                 setIsEditing(false);
               }}
             />
-
-            <HireButton
-              label="Add Skill"
-              leftSection={<Plus />}
-              variant="light"
-              onClick={() => addSkillsForm.insertListItem("skills", { description: "", key: randomId() })}
-            />
-
             <HireButton
               label="Done"
               leftSection={<Check />}
@@ -91,11 +54,15 @@ export default function PaperJobPositionSkills(
           />
         }
       </Group>
+
       <Divider my="md" />
-      <Stack>
-        {updatedSkillsMapped}
-        {addedSkillsMapped}
-      </Stack>
+
+      <JobPositionForm
+        form={jobPositionForm}
+        onlyOtherInfo={true}
+        disabled={!isEditing}
+      />
     </Paper>
+
   );
 }

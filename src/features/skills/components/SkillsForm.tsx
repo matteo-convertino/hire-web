@@ -4,6 +4,7 @@ import { Plus } from "@phosphor-icons/react";
 import { randomId } from "@mantine/hooks";
 import SkillForm from "@/features/skills/components/SkillForm";
 import { AddSkillsFormTransformFunction, AddSkillsFormValues } from "@/features/skills/hooks/useSkillsAdd";
+import { HireButton } from "@/components/HireButton";
 
 export default function SkillsForm({ form }: {
   form: UseFormReturnType<AddSkillsFormValues, AddSkillsFormTransformFunction>,
@@ -22,15 +23,13 @@ export default function SkillsForm({ form }: {
       </Stack>
 
       <Group justify="space-between" mt="md">
-        <Button
+        <HireButton
+          label="Add skill"
+          leftSection={<Plus />}
           variant="default"
-          radius="md"
           onClick={() => form.insertListItem("skills", { description: "", key: randomId() })}
-        >
-          <Plus />
-          <Text size="sm" ml="xs">Add skill</Text>
-        </Button>
-        <Button type="submit" radius="md" variant="filled">Create</Button>
+        />
+        <HireButton label="Create" type="submit" />
       </Group>
     </>
   );

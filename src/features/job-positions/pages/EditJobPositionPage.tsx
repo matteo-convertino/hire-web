@@ -32,10 +32,10 @@ export default function EditJobPositionPage({ initialJobPosition }: {
         return;
       }
 
-      form.setValues(jobPosition);
+      form.initialize(jobPosition);
     } else {
       setJobPosition(initialJobPosition);
-      form.setValues(initialJobPosition);
+      form.initialize(initialJobPosition);
     }
   }, []);
 

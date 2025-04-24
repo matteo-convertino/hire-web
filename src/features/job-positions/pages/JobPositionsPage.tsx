@@ -5,26 +5,14 @@ import { ErrorDTO } from "@/dto/ErrorDTO";
 import { useRouter } from "next/navigation";
 import { useHireClientSideErrorHandler } from "@/hooks/useHireClientSideErrorHandler";
 import { JobPositionsGrid } from "@/features/job-positions/components/JobPositionsGrid";
-import { useEffect, useState } from "react";
-import useJobPositionsFetchAll from "@/features/job-positions/hooks/useJobPositionsFetchAll";
 
-export default function JobPositionsPage({ initialJobPositions, error }: {
-  initialJobPositions: JobPositionResponseDTO[] | null,
-  error: ErrorDTO | null
+export default function JobPositionsPage({ jobPositions, error }: {
+  jobPositions?: JobPositionResponseDTO[],
+  error?: ErrorDTO
 }) {
   const router = useRouter();
-  const [jobPositions, setJobPositions] = useState(initialJobPositions);
-  const { fetchAllJobPositions } = useJobPositionsFetchAll();
 
   useHireClientSideErrorHandler(error);
-
-  useEffect(() => {
-    if (initialJobPositions !== null) return;
-
-    fetchAllJobPositions({
-      onComplete: (jobPositions) => setJobPositions(jobPositions)
-    });
-  }, [initialJobPositions]);
 
   return (
     <JobPositionsGrid

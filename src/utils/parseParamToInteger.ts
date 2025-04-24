@@ -1,8 +1,8 @@
-export function parseParamToInteger(value: any): number | null {
+export function parseParamToInteger(value: any): number | undefined {
   const parsed = Number(value);
 
   if (isNaN(parsed) || !Number.isInteger(parsed)) {
-    return null;
+    return undefined;
   }
 
   return parsed;

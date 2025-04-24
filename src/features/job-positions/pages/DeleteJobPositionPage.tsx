@@ -16,7 +16,7 @@ export default function DeleteJobPositionPage({ isFirstPage }: { isFirstPage: bo
   const { setToFetchJobPositions } = useDashboardStore();
 
   const jobPositionId = parseParamToInteger(id);
-  if (jobPositionId === null) {
+  if (jobPositionId === undefined) {
     window.location.replace("/");
     return;
   }

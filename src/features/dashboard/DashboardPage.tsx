@@ -10,8 +10,8 @@ import { useJobPositionsAutoFetch } from "@/features/dashboard/hooks/useJobPosit
 import { useJobPositionEditStore } from "@/features/job-positions/stores/useJobPositionEditStore";
 
 export default function DashboardPage({ initialJobPositions, error }: {
-  initialJobPositions: JobPositionResponseDTO[] | null,
-  error: ErrorDTO | null
+  initialJobPositions?: JobPositionResponseDTO[],
+  error?: ErrorDTO
 }) {
   const router = useRouter();
   const { jobPositions } = useDashboardStore();

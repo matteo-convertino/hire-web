@@ -1,16 +1,16 @@
 "use client";
 
-import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
+import useHireApi from "@/hooks/useHireApi";
 import JobPositionService from "@/services/JobPositionService";
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 
 export default function useJobPositionDelete() {
   const jobPositionService = JobPositionService.getInstance();
-  const hireApiWithNotification = useHireApiWithNotification();
+  const hireApiWithNotification = useHireApi();
 
   const deleteJobPosition = ({ id, onComplete }: {
     id: number,
-    onComplete: ((_: JobPositionResponseDTO) => void) | null | undefined
+    onComplete?: (_: JobPositionResponseDTO) => void
   }) => {
     hireApiWithNotification({
       api: () => jobPositionService.delete(id),

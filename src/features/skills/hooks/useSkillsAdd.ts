@@ -54,7 +54,8 @@ export default function useSkillsAdd({ jobPositionId, defaultItem = true }: { jo
               resolve();
             },
             onError: () => reject(new Error()),
-            onGenericError: () => reject(new Error())
+            onGenericError: () => reject(new Error()),
+            showNotifications: false,
           });
         }))
     ).then(() => {

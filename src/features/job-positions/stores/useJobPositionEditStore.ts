@@ -2,11 +2,11 @@ import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 import { create } from "zustand";
 
 interface JobPositionToEdit {
-  jobPosition: JobPositionResponseDTO | null;
-  setJobPosition: (jobPosition: JobPositionResponseDTO | null) => void;
+  jobPosition?: JobPositionResponseDTO;
+  setJobPosition: (jobPosition?: JobPositionResponseDTO) => void;
 }
 
 export const useJobPositionEditStore = create<JobPositionToEdit>((set) => ({
-  jobPosition: null,
+  jobPosition: undefined,
   setJobPosition: (jobPosition) => set({ jobPosition })
 }));

@@ -1,6 +1,6 @@
 "use client";
 
-import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
+import useHireApi from "@/hooks/useHireApi";
 import JobPositionService from "@/services/JobPositionService";
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 import SkillService from "@/services/SkillService";
@@ -8,7 +8,7 @@ import { SkillResponseDTO } from "@/dto/response/SkillResponseDTO";
 
 export default function useSkillDelete() {
   const skillService = SkillService.getInstance();
-  const hireApiWithNotification = useHireApiWithNotification();
+  const hireApiWithNotification = useHireApi();
 
   const deleteSkill =  ({ id, onComplete }: {
     id: number,

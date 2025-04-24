@@ -23,7 +23,8 @@ export default function useSignUpGuestForm() {
   }) => {
     hireApi({
       api: () => authService.signUpGuest(data),
-      onComplete: onComplete
+      onComplete: onComplete,
+      showNotifications: false,
     });
   };
 

@@ -6,5 +6,5 @@ import { fetchAllJobPositions } from "@/features/job-positions/api/fetchAllJobPo
 export default async function Page() {
   const { response, error } = await fetchAllJobPositions();
 
-  return <JobPositionsPage initialJobPositions={response} error={error} />;
+  return <JobPositionsPage jobPositions={response} error={error} />;
 }

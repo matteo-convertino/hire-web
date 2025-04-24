@@ -10,9 +10,7 @@ import { useJobPositionEditStore } from "@/features/job-positions/stores/useJobP
 import useJobPositionForm from "@/features/job-positions/hooks/useJobPositionForm";
 import JobPositionForm from "@/features/job-positions/components/JobPositionForm";
 
-export default function EditJobPositionPage({ initialJobPosition }: {
-  initialJobPosition: JobPositionResponseDTO | null
-}) {
+export default function EditJobPositionPage({ initialJobPosition }: { initialJobPosition?: JobPositionResponseDTO }) {
   const { id } = useParams();
   const [opened, setOpened] = useState(false);
   const { setToFetchJobPositions } = useDashboardStore();
@@ -20,14 +18,14 @@ export default function EditJobPositionPage({ initialJobPosition }: {
   const { form, onSubmit } = useJobPositionForm();
 
   const jobPositionId = parseParamToInteger(id);
-  if (jobPositionId === null) {
+  if (jobPositionId === undefined) {
     window.location.replace("/");
     return;
   }
 
   useEffect(() => {
-    if (initialJobPosition === null) {
-      if (jobPosition === null) {
+    if (initialJobPosition === undefined) {
+      if (jobPosition === undefined) {
         window.location.replace("/");
         return;
       }

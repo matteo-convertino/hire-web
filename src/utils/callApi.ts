@@ -4,14 +4,14 @@ import { notFound, redirect } from "next/navigation";
 export function callApi<T>(
   {
     api,
-    onComplete = null,
-    onError = null,
-    onGenericError = null
+    onComplete,
+    onError,
+    onGenericError
   }: {
     api: () => Promise<T>,
-    onComplete?: null | ((_: T) => void),
-    onError?: null | ((_: ErrorDTO) => void),
-    onGenericError?: null | ((_: unknown) => void)
+    onComplete?: (_: T) => void,
+    onError?: (_: ErrorDTO) => void,
+    onGenericError?: (_: unknown) => void
   }) {
   api()
     .then(res => onComplete?.(res))
@@ -25,14 +25,14 @@ export function callApi<T>(
 
 export async function callApiAsync<T>({ api, onError }: {
   api: () => Promise<T>,
-  onError?: ((_: ErrorDTO) => void),
+  onError?: (_: ErrorDTO) => void,
 }): Promise<{
-  response: T | null,
-  error: ErrorDTO | null,
+  response?: T,
+  error?: ErrorDTO,
 }> {
   try {
     const response = await api();
-    return { response: response, error: null };
+    return { response: response, error: undefined };
   } catch (e: any) {
     const rawData = e?.response?.data;
     const parsed = ErrorDTOSchema.safeParse(rawData);
@@ -41,7 +41,7 @@ export async function callApiAsync<T>({ api, onError }: {
       if (onError !== undefined) onError(e.response.data);
       else if (e.status === 404) notFound();
 
-      return { response: null, error: e.response.data };
+      return { response: undefined, error: e.response.data };
     }
 
     redirect("/error");

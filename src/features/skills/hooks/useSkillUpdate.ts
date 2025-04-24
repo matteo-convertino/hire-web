@@ -1,5 +1,5 @@
 import SkillService from "@/services/SkillService";
-import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
+import useHireApi from "@/hooks/useHireApi";
 import { SkillUpdateRequestDTO } from "@/dto/request/SkillUpdateRequestDTO";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { randomId } from "@mantine/hooks";
@@ -28,7 +28,7 @@ export default function useSkillUpdate({ initialSkills }: { initialSkills: Skill
   });
 
   const skillService = SkillService.getInstance();
-  const hireApiWithNotification = useHireApiWithNotification();
+  const hireApiWithNotification = useHireApi();
 
   const updateSkill = ({ index, onComplete }: {
     index: number,

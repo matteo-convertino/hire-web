@@ -9,7 +9,7 @@ export const JobPositionsGrid = (
     onEdit,
     onDelete
   }: {
-    jobPositions: JobPositionResponseDTO[],
+    jobPositions?: JobPositionResponseDTO[],
     onView?: (id: number) => void
     onEdit?: (jobPosition: JobPositionResponseDTO) => void
     onDelete?: (id: number) => void

@@ -1,6 +1,6 @@
 import { useForm, zodResolver } from "@mantine/form";
 import JobPositionService from "@/services/JobPositionService";
-import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
+import useHireApi from "@/hooks/useHireApi";
 import { JobPositionRequestDTO, jobPositionSchema } from "@/dto/request/JobPositionRequestDTO";
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 
@@ -24,7 +24,7 @@ export default function useJobPositionForm({ initialJobPosition } : { initialJob
   });
 
   const jobPositionService = JobPositionService.getInstance();
-  const hireApiWithNotification = useHireApiWithNotification();
+  const hireApiWithNotification = useHireApi();
 
   const onSubmit = async ({ jobPositionId, data, onComplete }: {
     jobPositionId?: number,

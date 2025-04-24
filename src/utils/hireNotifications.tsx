@@ -101,10 +101,10 @@ export const showHireInfoNotification = ({ title, message }: { title: string, me
 };
 
 export const showHireErrors = ({ notificationId, errorDTO }: {
-  notificationId: string | null,
-  errorDTO: ErrorDTO | null
+  notificationId?: string,
+  errorDTO?: ErrorDTO
 }) => {
-  if (errorDTO === null) {
+  if (errorDTO === undefined) {
     showHireErrorNotification({
       title: "Generic error",
       message: "Internal server error"
@@ -113,13 +113,13 @@ export const showHireErrors = ({ notificationId, errorDTO }: {
     const { error: title, message } = errorDTO;
 
     if (typeof message === "string") {
-      if (notificationId === null) {
+      if (notificationId === undefined) {
         showHireErrorNotification({ title, message });
       } else {
         updateHireErrorNotification({ notificationId, title, message });
       }
     } else if (typeof message === "object") {
-      if (notificationId !== null) notifications.hide(notificationId);
+      if (notificationId !== undefined) notifications.hide(notificationId);
 
       for (const key in message) {
         const value = message[key];

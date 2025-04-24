@@ -15,7 +15,7 @@ export default function AddSkillsPage({ isFirstPage }: { isFirstPage: boolean })
   const { setToFetchJobPositions } = useDashboardStore();
 
   const jobPositionId = parseParamToInteger(id);
-  if (jobPositionId === null) {
+  if (jobPositionId === undefined) {
     window.location.replace("/");
     return;
   }

@@ -1,14 +1,13 @@
 import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
 import { useDashboardStore } from "@/features/dashboard/stores/useDashboardStore";
 import { useEffect } from "react";
-import useJobPositionsFetchAll from "@/features/job-positions/hooks/useJobPositionsFetchAll";
 import useJobPositionsFetchAllByUser from "@/features/dashboard/hooks/useJobPositionsFetchAllByUser";
 
-export function useJobPositionsAutoFetch(initialJobPositions: JobPositionResponseDTO[] | null) {
+export function useJobPositionsAutoFetch(initialJobPositions: JobPositionResponseDTO[] = []) {
   const {
     setJobPositions,
     toFetchJobPositions,
-    setToFetchJobPositions,
+    setToFetchJobPositions
   } = useDashboardStore();
   const { fetchAllJobPositionsByUser } = useJobPositionsFetchAllByUser();
 

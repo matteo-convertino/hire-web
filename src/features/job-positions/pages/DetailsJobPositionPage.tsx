@@ -11,7 +11,7 @@ import ModalSignUpGuest from "@/features/job-positions/components/details/modal/
 import ModalConfirm from "@/features/job-positions/components/details/modal/ModalConfirm";
 import useSkillsAdd from "@/features/skills/hooks/useSkillsAdd";
 import PaperJobPositionSkills from "@/features/job-positions/components/details/PaperJobPositionSkills";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { notFound } from "next/navigation";
 import useSkillDelete from "@/features/skills/hooks/useSkillDelete";
 import useSkillUpdate from "@/features/skills/hooks/useSkillUpdate";
@@ -20,11 +20,11 @@ import useJobPositionForm from "@/features/job-positions/hooks/useJobPositionFor
 import PaperJobPositionOtherInfo from "@/features/job-positions/components/details/PaperJobPositionOtherInfo";
 
 export default function DetailsJobPositionPage({ jobPosition, error, isOwner }: {
-  jobPosition: JobPositionResponseDTO | null,
-  error: ErrorDTO | null,
+  jobPosition?: JobPositionResponseDTO,
+  error?: ErrorDTO,
   isOwner: boolean,
 }) {
-  if (jobPosition === null) notFound();
+  if (jobPosition === undefined) notFound();
 
   const { form: signUpGuestForm, onSubmit: onSignUpGuestSubmit } = useSignUpGuestForm();
   const { form: addSkillsForm, onSubmit: onSkillsSubmit } = useSkillsAdd({

@@ -1,12 +1,12 @@
 import { useForm, zodResolver } from "@mantine/form";
 import AuthService from "@/services/AuthService";
-import useHireApiWithNotification from "@/hooks/useHireApiWithNotification";
+import useHireApi from "@/hooks/useHireApi";
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import { SignInRequestDTO, signInSchema } from "@/dto/request/SignInRequestDTO";
 
 export default function useSignInForm() {
   const authService = AuthService.getInstance();
-  const hireApiWithNotification = useHireApiWithNotification();
+  const hireApiWithNotification = useHireApi();
   const { setUser } = useAuthStore();
 
   const form = useForm<SignInRequestDTO>({

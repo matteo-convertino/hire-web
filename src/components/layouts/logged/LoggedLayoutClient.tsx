@@ -8,7 +8,7 @@ import LoggedMenu from "@/components/layouts/logged/LoggedMenu";
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 
 const LoggedLayoutClient = ({ userResponseDTO, children }: {
-  userResponseDTO: UserResponseDTO | null,
+  userResponseDTO?: UserResponseDTO,
   children: React.ReactNode
 }) => {
   const [opened, { toggle }] = useDisclosure();

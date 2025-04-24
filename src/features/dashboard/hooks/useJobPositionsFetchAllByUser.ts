@@ -7,11 +7,12 @@ export default function useJobPositionsFetchAllByUser() {
   const hireApi = useHireApi();
 
   const fetchAllJobPositionsByUser = ({ onComplete }: {
-    onComplete: ((_: JobPositionResponseDTO[]) => void) | null | undefined
+    onComplete?: (_: JobPositionResponseDTO[]) => void
   }) => {
     hireApi({
       api: () => jobPositionService.getAllByUser(),
-      onComplete: onComplete
+      onComplete: onComplete,
+      showNotifications: false
     });
   };
 

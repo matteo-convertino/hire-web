@@ -12,12 +12,13 @@ import ModalConfirm from "@/features/job-positions/components/details/modal/Moda
 import useSkillsAdd from "@/features/skills/hooks/useSkillsAdd";
 import PaperJobPositionSkills from "@/features/job-positions/components/details/PaperJobPositionSkills";
 import { useState } from "react";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import useSkillDelete from "@/features/skills/hooks/useSkillDelete";
 import useSkillUpdate from "@/features/skills/hooks/useSkillUpdate";
 import { randomId } from "@mantine/hooks";
 import useJobPositionForm from "@/features/job-positions/hooks/useJobPositionForm";
 import PaperJobPositionOtherInfo from "@/features/job-positions/components/details/PaperJobPositionOtherInfo";
+import useInterviewAdd from "@/features/interviews/hooks/useInterviewAdd";
 
 export default function DetailsJobPositionPage({ jobPosition, error, isOwner }: {
   jobPosition?: JobPositionResponseDTO,
@@ -41,6 +42,9 @@ export default function DetailsJobPositionPage({ jobPosition, error, isOwner }: 
   const [isEditingOtherInfo, setIsEditingOtherInfo] = useState(false);
   const stack = useModalsStack(["sign-up-guest", "confirm-action"]);
 
+  const { addInterview } = useInterviewAdd();
+  const router = useRouter();
+
   useHireClientSideErrorHandler(error);
 
   return (
@@ -53,7 +57,10 @@ export default function DetailsJobPositionPage({ jobPosition, error, isOwner }: 
             onComplete: () => {
               stack.closeAll();
               signUpGuestForm.reset();
-              console.log("CAN INTERVIEW");
+              addInterview({
+                jobPositionId: jobPosition.id,
+                onComplete: (interview) => router.push(`/interviews/${interview.id}`)
+              });
             }
           })
         } />

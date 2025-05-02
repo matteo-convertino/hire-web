@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AuthCookies } from "@/utils/AuthCookies";
 
 const hireAxiosClient = axios.create({
   headers: {
@@ -13,11 +14,10 @@ if (typeof window === "undefined") {
   hireAxiosClient.interceptors.request.use(async (config) => {
     const { cookies } = await import("next/headers");
     const cookieStore = await cookies();
-    const accessToken = cookieStore.get("access-token")?.value;
 
-    if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${accessToken}`;
-    }
+    const accessToken = cookieStore.get(config.url?.includes("/interviews") ? AuthCookies.ACCESS_TOKEN_GUEST : AuthCookies.ACCESS_TOKEN)?.value;
+
+    if (accessToken) config.headers["Authorization"] = `Bearer ${accessToken}`;
 
     return config;
   }, (error) => {

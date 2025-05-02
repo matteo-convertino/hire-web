@@ -22,8 +22,8 @@ export default class HireCookieService {
     return await HireCookieService.getAccessToken() !== undefined;
   }
 
-  public static getIdFromAccessToken(): Promise<number | null> {
-    return this.getFieldFromAccessToken("id");
+  public static getIdFromAccessToken(isGuest: boolean = false): Promise<number | null> {
+    return this.getFieldFromAccessToken("id", isGuest);
   }
 
   public static getNameFromAccessToken(): Promise<string | null> {
@@ -35,9 +35,10 @@ export default class HireCookieService {
   }
 
   private static async getFieldFromAccessToken<K extends keyof HireJwtPayload>(
-    field: K
+    field: K,
+    isGuest: boolean = false
   ): Promise<HireJwtPayload[K] | null> {
-    const accessToken = await HireCookieService.getAccessToken();
+    const accessToken = await HireCookieService.getAccessToken(isGuest);
     if (!accessToken) return null;
 
     try {

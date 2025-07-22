@@ -3,6 +3,8 @@ import { SkillResponseDTO } from "@/dto/response/SkillResponseDTO";
 import { InterviewResponseDTO } from "@/dto/response/InterviewResponseDTO";
 import { InterviewRequestDTO } from "@/dto/request/InterviewRequestDTO";
 import { InterviewRoutes } from "@/utils/routes/interviewRoutes";
+import { MessageResponseDTO } from "@/dto/response/MessageResponseDTO";
+import { MessageRoutes } from "@/utils/routes/messageRoutes";
 
 export default class InterviewService {
   private static instance: InterviewService;
@@ -40,6 +42,12 @@ export default class InterviewService {
   public async getAllByUser(): Promise<InterviewResponseDTO[]> {
     return hireAxiosClient.put<InterviewResponseDTO[]>(
       InterviewRoutes.FIND_ALL_BY_USER
+    ).then(res => res.data);
+  }
+
+  public async getAllMessagesByInterviewId(interviewId: number): Promise<MessageResponseDTO[]> {
+    return hireAxiosClient.get<MessageResponseDTO[]>(
+      MessageRoutes.FIND_ALL_BY_INTERVIEW_ID(interviewId),
     ).then(res => res.data);
   }
 }

@@ -1,19 +1,23 @@
 "use server";
 
-import HireCookieService from "@/services/utils/HireCookieService";
 import { fetchInterviewById } from "@/features/interviews/api/fetchInterviewById";
-import { redirect } from "next/navigation";
 import InterviewPage from "@/features/interviews/pages/InterviewPage";
+import { fetchMessagesByInterview } from "@/features/interviews/api/fetchMessagesByInterview";
+import { MessageResponseDTO } from "@/dto/response/MessageResponseDTO";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { response, error } = await fetchInterviewById({ idString: id });
+  const { response: interview, error } = await fetchInterviewById({ idString: id });
+  let messages: MessageResponseDTO[] = [];
 
-  // const userId = await HireCookieService.getIdFromAccessToken(true);
-  // if(userId === null || response?.userId !== userId) redirect("/");
+  if (interview !== undefined) {
+    const { response } = await fetchMessagesByInterview({ interviewId: interview.id });
+    if (response !== undefined) messages = response;
+  }
 
   return <InterviewPage
-    interview={response}
+    interview={interview}
+    initialMessages={messages}
     error={error}
   />;
 }

@@ -1,9 +1,12 @@
-import { ChatRole } from "@/utils/ChatRole";
+import { ChatRoleEnum } from "@/utils/ChatRole";
+import { z } from "zod";
 
-export type MessageResponseDTO = {
-    id: number
-    text: string
-    interviewId: number
-    isLastMessage: boolean
-    role: ChatRole
-}
+export const messageResponseSchema = z.object({
+  id: z.number(),
+  text: z.string(),
+  interviewId: z.number(),
+  lastMessage: z.boolean(),
+  role: ChatRoleEnum
+});
+
+export type MessageResponseDTO = z.infer<typeof messageResponseSchema>;

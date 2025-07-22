@@ -15,7 +15,9 @@ if (typeof window === "undefined") {
     const { cookies } = await import("next/headers");
     const cookieStore = await cookies();
 
-    const accessToken = cookieStore.get(config.url?.includes("/interviews") ? AuthCookies.ACCESS_TOKEN_GUEST : AuthCookies.ACCESS_TOKEN)?.value;
+    const guestRoutes = ["/interviews", "/messages", "/ws"];
+
+    const accessToken = cookieStore.get(guestRoutes.some(route => config.url?.includes(route)) ? AuthCookies.ACCESS_TOKEN_GUEST : AuthCookies.ACCESS_TOKEN)?.value;
 
     if (accessToken) config.headers["Authorization"] = `Bearer ${accessToken}`;
 

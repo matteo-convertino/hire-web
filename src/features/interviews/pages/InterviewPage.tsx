@@ -2,7 +2,7 @@
 
 import { ErrorDTO } from "@/dto/ErrorDTO";
 import { useHireClientSideErrorHandler } from "@/hooks/useHireClientSideErrorHandler";
-import { ActionIcon, Box, Container, Flex, ScrollArea, Text, TextInput } from "@mantine/core";
+import { ActionIcon, Box, Container, Flex, ScrollArea, Text, Textarea } from "@mantine/core";
 import { notFound, useRouter } from "next/navigation";
 import { InterviewResponseDTO } from "@/dto/response/InterviewResponseDTO";
 import { MessageResponseDTO } from "@/dto/response/MessageResponseDTO";
@@ -44,6 +44,9 @@ export default function InterviewPage({ interview, error, initialMessages }: {
               {messages.map((message: MessageResponseDTO, index) => {
                 return <ChatMessage key={index} isUser={message.role === "USER"} text={message.text} />;
               })}
+              {messages.length !== 0 && messages.at(-1)!.role === "USER" &&
+                <ChatMessage key={messages.at(-1)!.id + 1} isUser={false} text={undefined} />
+              }
             </Flex>
             <Box ref={messagesEndRef}></Box>
           </ScrollArea>
@@ -71,12 +74,15 @@ export default function InterviewPage({ interview, error, initialMessages }: {
               />
               :
               <form className={"sticky bottom-2"} onSubmit={form.onSubmit(onSubmit)}>
-                <TextInput
+                <Textarea
                   placeholder="Write here your answer..."
                   mt="sm"
                   size="md"
                   radius="md"
                   disabled={messages.length === 0}
+                  autosize
+                  minRows={1}
+                  maxRows={10}
                   rightSection={
                     <ActionIcon
                       variant="filled"

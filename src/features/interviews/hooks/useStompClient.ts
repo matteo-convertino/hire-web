@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Client, IMessage, StompSubscription } from "@stomp/stompjs";
+import { Client, IMessage } from "@stomp/stompjs";
 import { WebSocketRoutes } from "@/utils/routes/webSocketRoutes";
 import { ErrorDTO, ErrorDTOSchema } from "@/dto/ErrorDTO";
 import { MessageResponseDTO, messageResponseSchema } from "@/dto/response/MessageResponseDTO";
 import { MessageRequestDTO } from "@/dto/request/MessageRequestDTO";
+import { showHireErrors } from "@/utils/hireNotifications";
 
 export default function useStompClient() {
   const stompClient = useRef<Client>(undefined);
@@ -30,8 +31,10 @@ export default function useStompClient() {
       setConnected(true);
 
       subscribeToErrors({
-          callback: ((errorDTO: ErrorDTO) =>
-              console.log(`WebSocket error: ${errorDTO.message}`)
+          callback: ((errorDTO: ErrorDTO) => {
+              console.log(`WebSocket error: ${errorDTO.message}`);
+              showHireErrors({ errorDTO: errorDTO });
+            }
           )
         }
       );

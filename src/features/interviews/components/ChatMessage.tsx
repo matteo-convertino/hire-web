@@ -1,11 +1,8 @@
-import { ActionIcon, Avatar, Box, Button, Card, Flex, Group, Paper, Text } from "@mantine/core";
-import { JobPositionResponseDTO } from "@/dto/response/JobPositionResponseDTO";
-import { MouseEventHandler } from "react";
-import { OpenAiLogo, PencilSimple, Robot, Trash } from "@phosphor-icons/react";
-import { HireButton } from "@/components/HireButton";
+import { Avatar, Flex, Loader, Paper, Text } from "@mantine/core";
+import { OpenAiLogo } from "@phosphor-icons/react";
 
 export default function ChatMessage({ text, isUser }: {
-  text: string,
+  text: string | undefined,
   isUser: boolean,
 }) {
   return isUser ? (
@@ -13,9 +10,9 @@ export default function ChatMessage({ text, isUser }: {
       <Paper
         radius="lg"
         p="md"
-        className={'self-end max-w-[80%] bg-gray-600'}
+        className={"self-end max-w-[80%] bg-gray-600"}
         style={{
-          backgroundColor: 'var(--mantine-primary-color-light)'
+          backgroundColor: "var(--mantine-primary-color-light)"
         }}
       >
         <Text>
@@ -30,7 +27,7 @@ export default function ChatMessage({ text, isUser }: {
           <OpenAiLogo size={24} />
         </Avatar>
         <Text>
-          {text}
+          {text ?? <Loader type="dots" color="white" />}
         </Text>
       </Flex>
 

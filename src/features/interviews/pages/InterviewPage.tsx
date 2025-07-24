@@ -79,7 +79,7 @@ export default function InterviewPage({ interview, error, initialMessages }: {
                   mt="sm"
                   size="md"
                   radius="md"
-                  disabled={messages.length === 0}
+                  disabled={messages.length === 0 || messages.at(-1)!.role === "USER"}
                   autosize
                   minRows={1}
                   maxRows={10}
@@ -89,6 +89,7 @@ export default function InterviewPage({ interview, error, initialMessages }: {
                       size="lg"
                       radius="md"
                       type="submit"
+                      disabled={messages.length !== 0 && messages.at(-1)!.role === "USER"}
                     >
                       <PaperPlane />
                     </ActionIcon>

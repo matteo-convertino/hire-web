@@ -15,6 +15,7 @@ export default function LoggedMenu() {
         </Tooltip>
       </Link>
       <HireMenuButton label={"Dashboard"} href={"/dashboard"} />
+      <HireMenuButton label={"Reports"} href={"/reports"} />
       <HireMenuButton label={"Explore"} href={"/job-positions"} />
       <HireMenuButton label={"Logout"} href={"/logout"} />
     </>

@@ -15,7 +15,7 @@ export const JobPositionsGrid = (
     onDelete?: (id: number) => void
   }) => {
   return (
-    <SimpleGrid cols={3}>
+    <SimpleGrid cols={4}>
       {
         jobPositions?.map((jobPosition) =>
           <JobPositionCard

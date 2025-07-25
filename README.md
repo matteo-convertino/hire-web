@@ -17,3 +17,34 @@
 - Presentation: https://gamma.app/docs/HIRE-Human-Intelligence-Recruitment-Engine-rt665kwi8a0v93k
 - Back-end: https://github.com/matteo-convertino/hire-api
 - Front-end: https://github.com/matteo-convertino/hire-web
+
+# Screenshots
+Below are some screenshots of the various pages of HIRE.
+
+When talking about `MODERATORS`, it refers to users who can manage job positions.
+
+When talking about `GUESTS`, it refers to users who are **not** logged into the system and who can apply for various job positions.
+
+## Explore
+![](assets/1.png)
+
+## Dashboard (Moderator)
+![](assets/2.png)
+
+## Job position (Guest)
+![](assets/3.png)
+
+## Job position (Moderator)
+![](assets/4.png)
+
+## Application modal (Guest)
+![](assets/5.png)
+
+## Interview (Guest)
+![](assets/6.png)
+
+## Interview (Guest)
+![](assets/7.png)
+
+## Reports (Moderator)
+![](assets/8.png)
